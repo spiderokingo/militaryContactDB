@@ -1,0 +1,59 @@
+.fix-position-absolute{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.login-container{
+    display: table;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.table-cell {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.login-container h1{
+    margin-bottom: 40px;
+    margin-top: 0;
+}
+
+.login-et{
+    width: 20%;
+    margin: auto auto;
+}
+
+.login-et input{
+    min-width: 100%;
+    margin-top: 10px; 
+}
+
+.btn-app {
+    width: 100%;
+    background-color:  #00abf3;
+    border: 2px solid #a1a7c1;
+    margin-top: 20px !important;
+}
+
+.login-logo {
+    width: 20%;
+}
+
+.login-head{
+    margin: 20px 0px;
+    font-size: x-large;
+}
+
+.login-footer{
+    margin-top: 10px;
+    font-size: x-small;
+}
+
+.inp-err {
+    border: 1px solid red;
+}

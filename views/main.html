@@ -1,0 +1,22 @@
+
+  <div>
+    <div class="header_container">
+      <div class="header"></div>
+      <div class="menu_container">
+        <span class="menu" ng-click="mb_menu_clicked();"><img src="images/mb_menu.png" alt=""/></span>
+
+        <ul class="tab" ng-class="{menu_active: mb_menu_active}">
+          <li class="subtab" ng-repeat="tab in db_tabs" ng-click="mb_menu_clicked($index,false);">
+            <a id="Database_Menu" class="tablinks" ng-class="{active: $index==db_tabs[tabactive].id}" >{{tab.title}}</a>
+          </li>
+        </ul>
+    </div>
+  </div>
+
+
+  <div class="tab_content">
+    <div ng-include src="db_tabs[tabactive].url"/>
+  </div>
+  
+    <div ng-include src="views/login.html"/>
+</div>

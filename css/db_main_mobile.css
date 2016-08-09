@@ -1,0 +1,151 @@
+
+/* Device of width 678*/
+@media only screen and (max-width: 678px) {
+  body {
+  }
+
+  .header_container{
+    margin: 0px;
+    height: 60px;
+  }
+
+  .header{
+    overflow: hidden;
+  	display: block;
+    background-image: url("../images/Header_mb.jpg");
+    height: 60px;
+    border: 0;
+    border-radius: 0;
+  }
+
+  span.menu {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-right: 10px;
+    margin-top: 20px;
+  }
+
+  span.menu img{
+    display: block;
+    cursor: pointer;
+    padding-top: 10px;
+    padding-left: 5px;
+  }
+
+  ul.tab {
+    display: none;
+  }
+
+  .menu_active{
+    display: block !important;
+    -webkit-animation: fadeEffect 0.6s;
+    animation: fadeEffect 0.6s; /* Fading effect takes 1 second */
+  }
+
+  ul.tab {
+    padding-top: 10px;
+  }
+
+  ul.tab li a {
+    padding: 5px 10px;
+  }
+
+  ul.tab li{
+    width:100%;
+    background-color: white;
+    position: relative;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .menu_container{
+    height: 5px;
+    border-bottom: 1px solid #ccc;
+    border-left: 0px;
+    border-right: 0px;
+  	border-radius: 0;
+  }
+
+  @-webkit-keyframes fadeEffect {
+      from {opacity: 0;}
+      to {opacity: 1;}
+  }
+
+  @keyframes fadeEffect {
+      from {opacity: 0;}
+      to {opacity: 1;}
+  }
+
+  .tab_content {
+    margin-top: 20px;
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+
+  .search_container {
+    margin-left: 3px;
+    margin-right: 3px;
+  }
+
+  .card_container {
+    width: 98%;
+  }
+
+  .card_img {
+    width: 15%;
+    height: initial;
+    max-width: 40px;
+    margin-top: 5px;
+  }
+
+  .contact_card{
+    width: 85%;
+  }
+
+  .phone_provider_logo {
+    max-width: 30px;
+  }
+
+  .login-et{
+    width: 70%;
+    margin: auto auto;
+  }
+
+  .login-logo {
+    width: 30%;
+  }
+
+  .modal_w_h{
+    width: 100px;
+    height: 100px;
+  }
+  
+  .img_modal {
+    width: 100px;
+  }
+
+  .text_display_mb {
+      display: inline-block;
+      width: 200px;
+  }
+
+  .inling-block {
+      display: inline-block;
+  }
+
+  .modal_title_dd button{
+    padding-top: 0px;
+  }
+
+  .form-group {
+    margin-bottom: 0px;
+  }
+
+  .sm-vertical-middle{
+    vertical-align: middle;
+  }
+
+  .modal_company_dd button{
+    width: 200px;
+  }
+}

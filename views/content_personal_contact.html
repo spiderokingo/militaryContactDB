@@ -1,0 +1,68 @@
+<div ng-controller="personalController">
+  <center>
+
+    <input type="button" class="form-control" ng-show="user.Permission == 'USER'" value="LOGOUT" ng-click="userLogout();" ng-click="userLogout"/>
+    <div class="search_container">
+        <input type="text" class="form-control" ng-model="db_search" placeholder="Search"/>
+    </div>
+
+  </center>
+
+  <div class="card_container ft-lt" ng-repeat="person in PersonalRecord | filter:db_search" ng-click="personal_detail_modal(person);">
+      <div class="card_img ft-lt">
+        <img class="w-h-100per" fallback-src="personal_image/person.png" ng-src="{{person.ImageFullPath}}">
+      </div>
+      <div class="contact_card ft-lt">
+          <span> <b> {{person.TitleName}} {{person.FirstName }} {{person.LastName}} </b></span>
+          <p>
+            <span ng-repeat="phone in person.PhoneNumberList">
+              <span class="number_holder">
+                <a ng-href="{{tel}}{{phone.PhoneNumber}}" ng-click="$event.stopPropagation();">{{phone.PhoneNumber}}</a>
+                <img class="phone_provider_logo" ng-src="{{phone.ProviderLogo}}" ng-hide="phone.noProvider">
+                <span ng-hide="$index == (person.PhoneNumberList.length-1)">,</span>
+              </span>
+            </span>
+          </p>
+      </div>
+  </div>
+
+    <!--
+    <div class="col-md-4 overflow-hidden">
+      <div class="col-md-3 col-xs-3">
+        <img class="w-h-100per" src="personal_image/person.png">
+      </div>
+      <div class="col-md-9 col-xs-9">
+        <span>นาย ลิง นายสกุล ปลา </span>
+      </div>
+    </div> -->
+
+</div>
+
+<script type="text/ng-template" id="PersonalDetailModalTemplate.html">
+  <div class="modal-header">
+      <h4>{{person.TitleName}} {{person.FirstName }} {{person.LastName}}</h4>
+  </div>
+  <div class="modal-body">
+    <div class="img_modal">
+      <center>
+        <img class="w-h-100" fallback-src="personal_image/person.png" ng-src="{{person.ImageFullPath}}">
+      </center>
+    </div>
+    <div class="details_modal">
+      <b>  </b>
+      <span>
+        ชื่อเล่น  <span id="mg-5">:</span> {{person.NickName}}
+      </span>
+      <div>
+        กองร้อย : {{person.CompanyName}}
+      </div>
+      <div ng-repeat="phone in person.PhoneNumberList">
+        <a ng-href="{{tel}}{{phone.PhoneNumber}}" ng-click="$event.stopPropagation();">{{phone.PhoneNumber}}</a>
+        <img class="phone_provider_logo" ng-src="{{phone.ProviderLogo}}">
+      </div>
+    </div>
+  </div>
+	<div class="modal-footer">
+      <button class="btn btn-primary" type="button" ng-click="close()">Close</button>
+  </div>
+</script>

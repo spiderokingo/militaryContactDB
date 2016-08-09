@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="AngularJs/Bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="AngularJs/Bootstrap/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="resources/AngularJS-Toaster-master/toaster.min.css">
+    <link rel="stylesheet" href="css/db_main.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/db_main_mobile.css">
+    <link rel="stylesheet" href="css/personal_details.css">
+
+    <!-- Import Script -->
+    <script src="AngularJs/angular.min.js"></script>
+    <script src="resources/jquery-1.12.4.min.js"></script>
+    <script src="AngularJs/bootstrap.js"></script>
+    <script src="resources/angular-local-storage-master/dist/angular-local-storage.min.js"></script>
+    <script src="resources/AngularJS-Toaster-master/toaster.min.js"></script>
+    <script src="resources/angular-ui-router.js"></script>
+    <script src="resources/ng-file-upload/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
+    <script src="resources/ng-file-upload/ng-file-upload.min.js"></script>
+    <script src="AngularJs/angular-animate.min.js" ></script>
+    
+
+    <script src="scripts/app.js"></script>
+    <script src="scripts/siteService.js"></script>
+    <script src="scripts/database.js"></script>
+    <script src="scripts/login.js"></script>
+    <script src="scripts/personalDetails.js"></script>
+
+    <!-- Meta tag -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{title}}</title>
+
+</head>
+<body ng-app="com.infantry43.database" ng-controller="DemoController">
+
+  <!-- BEGIN Import files -->
+  <!--<script src="scripts/database.js"></script>-->
+  <script src="AngularJs/Bootstrap/ui-bootstrap-tpls-1.3.3.min.js"></script>
+  <!-- END Import files -->
+
+  <div>
+
+      <div ui-view></div>
+
+  </div>
+
+  <toaster-container toaster-options="{'time-out': 2000, 'animation-class': 'toast-top-center'}"></toaster-container>
+
+</body>
+</html>
