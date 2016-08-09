@@ -140,7 +140,7 @@
           <span class="glyphicon glyphicon-plus" aria-hidden="true" ng-show="isEditPersonalDetails" ng-click="addAddress();"></span>
         </label>
         <div>
-          <form novalidate class="form-inline address_title" ng-repeat="address in person.Address" ng-hide="address.Mode == 'DEL'">
+          <form class="form-inline address_title" ng-repeat="address in person.Address" ng-hide="address.Mode == 'DEL'">
             <div class="form-group">
               <span ng-hide="!address.HouseNumber && !isEditPersonalDetails">เลขที่ </span><input type="text" class="form-control inline-block address_display" ng-class="{'address_editing ':isEditPersonalDetails}"
               resize-address ng-model="address.HouseNumber" ng-disabled="!isEditPersonalDetails">

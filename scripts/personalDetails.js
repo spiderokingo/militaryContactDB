@@ -27,8 +27,6 @@ app.controller('personalController', function($scope, $http, $uibModal, $log, $r
 		request.success(function (res) {
 			$scope.PersonalRecord = res.PersonalRecord;
 			$scope.TotalItems = res.TotalItems;
-
-			console.log(res);
 		});
 	}
 

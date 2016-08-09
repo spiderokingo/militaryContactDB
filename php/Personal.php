@@ -136,8 +136,51 @@ if($data->Mode == "UPDATE"){
 	$sql2 .= ",Position='".$data->obj->Position."'";
 	$sql2 .= ",Company='".$data->obj->Company."'";
 	$sql2 .= " WHERE ID='".$data->obj->TbArmyID."'";
+	$statusMilitary = ($conn->query($sql2) === TRUE? "Success":"False");
 
-	//------- PhoneNumber Update ------------------------
+	//------- Address Update -------//
+	$AddressList = $data->obj->Address;
+	$Address_length = count($AddressList);
+
+	for($i=0;$i<$Address_length;$i++){
+		switch($AddressList[$i]->Mode){
+			case "EDIT" :
+				$sql_Add = "UPDATE personal_address SET ";
+				$sql_Add .= "HouseNumber='".$AddressList[$i]->HouseNumber."'";
+				$sql_Add .= ",Moo='".$AddressList[$i]->Moo."'";
+				$sql_Add .= ",Lane='".$AddressList[$i]->Lane."'";
+				$sql_Add .= ",Road='".$AddressList[$i]->Road."'";
+				$sql_Add .= ",SubDistrict='".$AddressList[$i]->SubDistrict."'";
+				$sql_Add .= ",District='".$AddressList[$i]->District."'";
+				$sql_Add .= ",Province='".$AddressList[$i]->Province."'";
+				$sql_Add .= ",PostCode='".$AddressList[$i]->PostCode."'";
+				$sql_Add .= ",DateTime='".$time."'";
+				$sql_Add .= " WHERE ID='".$AddressList[$i]->ID."'";
+				$statusAddress = "Edit ".($conn->query($sql_Add) === TRUE? "Success":"False");
+				break;
+			case "INS" :
+				if(empty($AddressList[$i]->HouseNumber) and empty($AddressList[$i]->Moo) and empty($AddressList[$i]->Lane) and empty($AddressList[$i]->Road) and empty($AddressList[$i]->SubDistrict) and empty($AddressList[$i]->District) and empty($AddressList[$i]->Province) and empty($AddressList[$i]->PostCode)){
+					$statusAddress="none";
+				}else{
+					$sql_Add = "INSERT INTO personal_address ";
+					$sql_Add .= "(PersonalID,HouseNumber,Moo,Lane,Road,SubDistrict,District,Province,PostCode,DateTime) ";
+					$sql_Add .= "VALUES ";
+					$sql_Add .= "('".$data->obj->ID."','".$AddressList[$i]->HouseNumber."'";
+					$sql_Add .= ",'".$AddressList[$i]->Moo."','".$AddressList[$i]->Lane."'";
+					$sql_Add .= ",'".$AddressList[$i]->Road."','".$AddressList[$i]->SubDistrict."'";
+					$sql_Add .= ",'".$AddressList[$i]->District."','".$AddressList[$i]->Province."'";
+					$sql_Add .= ",'".$AddressList[$i]->PostCode."','".$time."')";
+					$statusAddress = "Insert ".($conn->query($sql_Add) === TRUE? "Success":"False");
+				}
+				break;
+			case "DEL" :
+				$sql_Add = "DELETE FROM personal_address WHERE ID='".$AddressList[$i]->ID."'";
+				$statusAddress = "Delete ".($conn->query($sql_Add) === TRUE? "Success":"False");
+				break;
+		}
+	}
+
+	//------- PhoneNumber Update -------//
 	$PhoneNumberList = $data->obj->PhoneNumberList;
 	$PNL_length = count($PhoneNumberList);
 
@@ -149,8 +192,7 @@ if($data->Mode == "UPDATE"){
 				$sql_PNL .= "PhoneProvider='".$PhoneNumberList[$i]->PhoneProvider."'";
 				$sql_PNL .= "DateTime='".$time."'";
 				$sql_PNL .= " WHERE ID='".$PhoneNumberList[$i]->ID."'";
-//				if ($conn->query($sql_PNL) === TRUE){$statusPhoneNumber = "Edit Success";}else{$statusPhoneNumber = "Edit False";}
-				$statusPhoneNumber = "Delete ".($conn->query($sql_PNL) === TRUE? "Success":"False");
+				$statusPhoneNumber = "Edit ".($conn->query($sql_PNL) === TRUE? "Success":"False");
 				break;
 			case "INS" :
 				if($PhoneNumberList[$i]->PhoneNumber!=""){
@@ -158,19 +200,17 @@ if($data->Mode == "UPDATE"){
 				$sql_PNL .= "(PersonalID,PhoneNumber,PhoneProvider,DateTime) ";
 				$sql_PNL .= "VALUES ";
 				$sql_PNL .= "('".$data->obj->ID."','".$PhoneNumberList[$i]->PhoneNumber."','".$PhoneNumberList[$i]->PhoneProvider."','".$time."')";
-//				if ($conn->query($sql_PNL) === TRUE){$statusPhoneNumber = "Insert Success";}else{$statusPhoneNumber = "Insert False";}
-				$statusPhoneNumber = "Delete ".($conn->query($sql_PNL) === TRUE? "Success":"False");
+				$statusPhoneNumber = "Insert ".($conn->query($sql_PNL) === TRUE? "Success":"False");
 				}else{$statusPhoneNumber="none";}
 				break;
 			case "DEL" :
 				$sql_PNL = "DELETE FROM personal_phone WHERE ID='".$PhoneNumberList[$i]->ID."'";
-//				if ($conn->query($sql_PNL) === TRUE){$statusPhoneNumber = "Delete Success";}else{$statusPhoneNumber = "Delete False";}
 				$statusPhoneNumber = "Delete ".($conn->query($sql_PNL) === TRUE? "Success":"False");
 				break;
 		}
 	}
 
-	if ($conn->query($sql) === TRUE and $conn->query($sql2) === TRUE) {
+	if ($conn->query($sql) === TRUE){
     	$outp = '{"result":"success","message":"updated successfully","statusUpdate":[{"Mititary":"'.$statusMititary.'","Address":"'.$statusAddress.'","PhoneNumber":"'.$statusPhoneNumber.'"}]}';
 	} else {
     	$outp = '{"result":"False","message":"Error updating record '. $conn->error.'"';

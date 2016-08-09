@@ -126,7 +126,11 @@
 
   .text_display_mb {
       display: inline-block;
-      width: 200px;
+      width: 160px;
+  }
+
+  .text_display {
+      width: 160px !important;
   }
 
   .inling-block {
@@ -146,6 +150,22 @@
   }
 
   .modal_company_dd button{
-    width: 200px;
+    width: 160px;
   }
+
+  .form-inline {
+    margin-left: 0px;
+  }
+  
+  .address_title {
+    display: inline-block;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  #mg-90 { margin-left: 14px; }
+  #mg-92 { margin-left: 16px; }
+  #mg-76 { margin-left: 0px; }
+  #mg-58 { margin-left: 0px; }
+  #mg-61 { margin-left: 4px; }
 }

@@ -158,7 +158,7 @@ span.menu img{
 }
 
 .details_modal img{
-  max-width: 60px;
+  max-width: 30px;
   max-height: 25px;
 }
 
@@ -302,7 +302,7 @@ span.menu img{
 
 .et_phone_number {
   display: inline-block;
-  width: 200px;
+  width: 150px;
   vertical-align: middle;
 }
 
