@@ -14,6 +14,7 @@ $data = json_decode($postData);
 
 //----- Path เก็บรูป -----------------------------------
 $ImagePath = "personal_image/";
+$time = date("Y-m-d H:i:s");
 
 $outp = "";
 
@@ -31,7 +32,7 @@ if($data->Mode == "LIST"){
 
 	//---- ตรวจสอบถ้า SearchText ไม่เท่ากับค่าว่าง ให้ทำการ Search -----------------
 	if($data->SearchText!=""){
-		$sql .= "WHERE Name LIKE '%".$data->SearchText."%' or Sername LIKE '%".$data->SearchText."%'";
+		$sql .= "WHERE FirstName LIKE '%".$data->SearchText."%' or LastName LIKE '%".$data->SearchText."%' or NickName LIKE '%".$data->SearchText."%'";
 	}
 	$result = $conn->query($sql);
 	$Num_Rows = $result->num_rows;
@@ -42,10 +43,10 @@ if($data->Mode == "LIST"){
 	while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
     	if ($outp != "") {$outp .= ",";}
     	$outp .= '{"ID":"'.$rs["PersonalID"].'"';
-		$outp .= ',"ImageFullPath":"'.$ImagePath.$rs["Picture"].'"';
+		$outp .= ',"ImageFullPath":"'.$ImagePath.$rs["ImageName"].'"';
 		$outp .= ',"TitleName":"'. $rs["TitleName"].'"';
-		$outp .= ',"FirstName":"'. $rs["Name"].'"';
-		$outp .= ',"LastName":"'. $rs["Sername"].'"';
+		$outp .= ',"FirstName":"'. $rs["FirstName"].'"';
+		$outp .= ',"LastName":"'. $rs["LastName"].'"';
 		$outp .= ',"Company":"'. $rs["Company"].'"';
 		$outp .= '}';
 	}
@@ -61,18 +62,18 @@ $outp = "";
 
 $rs = $result->fetch_array(MYSQLI_ASSOC);
     $outp .= '{"ID":"'.$rs["PersonalID"].'"';
-	$outp .= ',"ImageFullPath":"'.$ImagePath.$rs["Picture"].'"';
-	$outp .= ',"ImageName":"'.$rs["Picture"].'"';
+	$outp .= ',"ImageFullPath":"'.$ImagePath.$rs["ImageName"].'"';
+	$outp .= ',"ImageName":"'.$rs["ImageName"].'"';
 	$outp .= ',"CitizenID":"'.$rs["CitizenID"].'"';
 	$outp .= ',"TitleName":"'. $rs["TitleName"].'"';
-	$outp .= ',"FirstName":"'. $rs["Name"].'"';
-	$outp .= ',"LastName":"'. $rs["Sername"].'"';
+	$outp .= ',"FirstName":"'. $rs["FirstName"].'"';
+	$outp .= ',"LastName":"'. $rs["LastName"].'"';
 	$outp .= ',"NickName":"'. $rs["NickName"].'"';
 	$outp .= ',"BirthDay":"'. $rs["BirthDay"].'"';
 	$outp .= ',"BloodGroup":"'. $rs["BloodGroup"].'"';
 
 	//------------ Mititary Data -----------------------------------------
-		$resultMilitary = $conn->query("SELECT * FROM personal_army WHERE PersonalID='".$rs["PersonalID"]."'");
+		$resultMilitary = $conn->query("SELECT * FROM personal_military WHERE PersonalID='".$rs["PersonalID"]."'");
 		$outp3 = "";
 		$rsMilitary = $resultMilitary->fetch_array(MYSQLI_ASSOC);
 		
@@ -86,7 +87,10 @@ $rs = $result->fetch_array(MYSQLI_ASSOC);
 		$outp2 = "";
 		while($rs2 = $result2->fetch_array(MYSQLI_ASSOC)) {
 			if ($outp2 != "") {$outp2 .= ",";}
-			$outp2 .= '{"ID":"'.$rs2["ID"].'","PhoneNumber":"'.$rs2["PhoneNumber"].'","PhoneProvider":"'.$rs2["PhoneProvider"].'"}';
+			$outp2 .= '{"Mode":"EDIT"';
+			$outp2 .= ',"ID":"'.$rs2["ID"].'"';
+			$outp2 .= ',"PhoneNumber":"'.$rs2["PhoneNumber"].'"';
+			$outp2 .= ',"PhoneProvider":"'.$rs2["PhoneProvider"].'"}';
 		}
 	$outp .= ',"PhoneNumberList":['.$outp2.']';
 
@@ -96,7 +100,9 @@ $rs = $result->fetch_array(MYSQLI_ASSOC);
 		$outp3 = "";
 		while($rs3 = $result3->fetch_array(MYSQLI_ASSOC)) {
 			if ($outp3 != "") {$outp3 .= ",";}
-			$outp3 .= '{"Category":"'.$rs3["ID"].'"';
+			$outp3 .= '{"Mode":"EDIT"';
+			$outp3 .= ',"ID":"'.$rs3["ID"].'"';
+			$outp3 .= ',"Category":"'.$rs3["Category"].'"';
 			$outp3 .= ',"HouseNumber":"'.$rs3["HouseNumber"].'"';
 			$outp3 .= ',"Moo":"'.$rs3["Moo"].'"';
 			$outp3 .= ',"Lane":"'.$rs3["Lane"].'"';
@@ -115,26 +121,60 @@ $rs = $result->fetch_array(MYSQLI_ASSOC);
 if($data->Mode == "UPDATE"){
 
 	$sql = "UPDATE personal SET ";
-	$sql .= "Picture='".$data->obj->ImageName."'";
+	$sql .= "CitizenID='".$data->obj->CitizenID."'";
+	$sql .= ", ImageName='".$data->obj->ImageName."'";
 	$sql .= ", TitleName='".$data->obj->TitleName."'";
-	$sql .= ", Name='".$data->obj->FirstName."'";
-	$sql .= ", Sername='".$data->obj->LastName."'";
+	$sql .= ", FirstName='".$data->obj->FirstName."'";
+	$sql .= ", LastName='".$data->obj->LastName."'";
 	$sql .= ", NickName='".$data->obj->NickName."'";
 	$sql .= ", BirthDay='".$data->obj->BirthDay."'";
 	$sql .= ", BloodGroup='".$data->obj->BloodGroup."'";
-	$sql .= ", Company='".$data->obj->Company."'";
 	$sql .= " WHERE PersonalID='".$data->obj->ID."'";
 
-if ($conn->query($sql) === TRUE) {
-    $outp = '{"result":"success","message":"updated successfully"}';
-} else {
-    $outp = '{"result":"False","message":"Error updating record '. $conn->error.'"';
-}
+	$sql2 = "UPDATE personal_military SET ";
+	$sql2 .= "MilitaryID='".$data->obj->MilitaryID."'";
+	$sql2 .= ",Position='".$data->obj->Position."'";
+	$sql2 .= ",Company='".$data->obj->Company."'";
+	$sql2 .= " WHERE ID='".$data->obj->TbArmyID."'";
 
 	//------- PhoneNumber Update ------------------------
-	$PhoneNumberList = $data->PhoneNumberList;
-	
+	$PhoneNumberList = $data->obj->PhoneNumberList;
+	$PNL_length = count($PhoneNumberList);
 
+	for($i=0;$i<$PNL_length;$i++){
+		switch($PhoneNumberList[$i]->Mode){
+			case "EDIT" :
+				$sql_PNL = "UPDATE personal_phone SET ";
+				$sql_PNL .= "PhoneNumber='".$PhoneNumberList[$i]->PhoneNumber."'";
+				$sql_PNL .= "PhoneProvider='".$PhoneNumberList[$i]->PhoneProvider."'";
+				$sql_PNL .= "DateTime='".$time."'";
+				$sql_PNL .= " WHERE ID='".$PhoneNumberList[$i]->ID."'";
+//				if ($conn->query($sql_PNL) === TRUE){$statusPhoneNumber = "Edit Success";}else{$statusPhoneNumber = "Edit False";}
+				$statusPhoneNumber = "Delete ".($conn->query($sql_PNL) === TRUE? "Success":"False");
+				break;
+			case "INS" :
+				if($PhoneNumberList[$i]->PhoneNumber!=""){
+				$sql_PNL = "INSERT INTO personal_phone ";
+				$sql_PNL .= "(PersonalID,PhoneNumber,PhoneProvider,DateTime) ";
+				$sql_PNL .= "VALUES ";
+				$sql_PNL .= "('".$data->obj->ID."','".$PhoneNumberList[$i]->PhoneNumber."','".$PhoneNumberList[$i]->PhoneProvider."','".$time."')";
+//				if ($conn->query($sql_PNL) === TRUE){$statusPhoneNumber = "Insert Success";}else{$statusPhoneNumber = "Insert False";}
+				$statusPhoneNumber = "Delete ".($conn->query($sql_PNL) === TRUE? "Success":"False");
+				}else{$statusPhoneNumber="none";}
+				break;
+			case "DEL" :
+				$sql_PNL = "DELETE FROM personal_phone WHERE ID='".$PhoneNumberList[$i]->ID."'";
+//				if ($conn->query($sql_PNL) === TRUE){$statusPhoneNumber = "Delete Success";}else{$statusPhoneNumber = "Delete False";}
+				$statusPhoneNumber = "Delete ".($conn->query($sql_PNL) === TRUE? "Success":"False");
+				break;
+		}
+	}
+
+	if ($conn->query($sql) === TRUE and $conn->query($sql2) === TRUE) {
+    	$outp = '{"result":"success","message":"updated successfully","statusUpdate":[{"Mititary":"'.$statusMititary.'","Address":"'.$statusAddress.'","PhoneNumber":"'.$statusPhoneNumber.'"}]}';
+	} else {
+    	$outp = '{"result":"False","message":"Error updating record '. $conn->error.'"';
+	}
 
 }
 

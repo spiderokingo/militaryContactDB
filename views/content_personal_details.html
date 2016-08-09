@@ -136,58 +136,68 @@
         </div>
       </form>
 
-        <label class="number-label"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> ที่อยู่</label>
-        <form class="form-inline address_title" ng-repeat="address in person.Address">
-          <div class="form-group">
-            <span ng-hide="!address.HouseNumber && !isEditPersonalDetails">เลขที่ </span><input type="text" class="form-control inline-block address_display" ng-class="{'address_editing ':isEditPersonalDetails}"
-            resize-address ng-model="address.HouseNumber" ng-disabled="!isEditPersonalDetails">
-          </div>
-          <div class="form-group">
-            <span ng-hide="!address.Moo && !isEditPersonalDetails">หมู่ </span><input type="text" class="form-control inline-block address_display" ng-class="{'address_editing ':isEditPersonalDetails}"
-            resize-address ng-model="address.Moo" ng-disabled="!isEditPersonalDetails">
-          </div>
-          <div class="form-group">
-            <span ng-hide="!address.Lane && !isEditPersonalDetails">ซอย </span><input type="text" class="form-control inline-block address_display" ng-class="{'address_editing ':isEditPersonalDetails}"
-            resize-address ng-model="address.Lane" ng-disabled="!isEditPersonalDetails">
-          </div>
-          <div class="form-group">
-            <span ng-hide="!address.Road && !isEditPersonalDetails">ถนน </span><input type="text" class="form-control inline-block address_display" ng-class="{'address_editing ':isEditPersonalDetails}"
-            resize-address ng-model="address.Road" ng-disabled="!isEditPersonalDetails">
-          </div>
-          <div class="form-group">
-            <span ng-hide="!address.SubDistrict && !isEditPersonalDetails">ตำบล </span><input type="text" class="form-control inline-block address_display" ng-class="{'address_editing ':isEditPersonalDetails}"
-            resize-address ng-model="address.SubDistrict" ng-disabled="!isEditPersonalDetails">
-          </div>
-          <div class="form-group">
-            <span ng-hide="!address.District && !isEditPersonalDetails">อำเภอ </span><input type="text" class="form-control inline-block address_display" ng-class="{'address_editing ':isEditPersonalDetails}"
-            resize-address ng-model="address.District" ng-disabled="!isEditPersonalDetails">
-          </div>
-          <div class="form-group">
-            <span ng-hide="!address.Province && !isEditPersonalDetails">จังหวัด </span><input type="text" class="form-control inline-block address_display" ng-class="{'address_editing ':isEditPersonalDetails}"
-            resize-address ng-model="address.Province" ng-disabled="!isEditPersonalDetails">
-          </div>
-          <div class="form-group">
-            <span ng-show="isEditPersonalDetails">ระหัสไปรษณีย์ </span><input type="text" class="form-control inline-block address_display" ng-class="{'address_editing ':isEditPersonalDetails}"
-            resize-address ng-model="address.PostCode" ng-disabled="!isEditPersonalDetails">
-          </div>
-        </form>
+        <label class="number-label"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> ที่อยู่
+          <span class="glyphicon glyphicon-plus" aria-hidden="true" ng-show="isEditPersonalDetails" ng-click="addAddress();"></span>
+        </label>
+        <div>
+          <form novalidate class="form-inline address_title" ng-repeat="address in person.Address" ng-hide="address.Mode == 'DEL'">
+            <div class="form-group">
+              <span ng-hide="!address.HouseNumber && !isEditPersonalDetails">เลขที่ </span><input type="text" class="form-control inline-block address_display" ng-class="{'address_editing ':isEditPersonalDetails}"
+              resize-address ng-model="address.HouseNumber" ng-disabled="!isEditPersonalDetails">
+            </div>
+            <div class="form-group">
+              <span ng-hide="!address.Moo && !isEditPersonalDetails">หมู่ </span><input type="text" class="form-control inline-block address_display" ng-class="{'address_editing ':isEditPersonalDetails}"
+              resize-address ng-model="address.Moo" ng-disabled="!isEditPersonalDetails">
+            </div>
+            <div class="form-group">
+              <span ng-hide="!address.Lane && !isEditPersonalDetails">ซอย </span><input type="text" class="form-control inline-block address_display" ng-class="{'address_editing ':isEditPersonalDetails}"
+              resize-address ng-model="address.Lane" ng-disabled="!isEditPersonalDetails">
+            </div>
+            <div class="form-group">
+              <span ng-hide="!address.Road && !isEditPersonalDetails">ถนน </span><input type="text" class="form-control inline-block address_display" ng-class="{'address_editing ':isEditPersonalDetails}"
+              resize-address ng-model="address.Road" ng-disabled="!isEditPersonalDetails">
+            </div>
+            <div class="form-group">
+              <span ng-hide="!address.SubDistrict && !isEditPersonalDetails">ตำบล </span><input type="text" class="form-control inline-block address_display" ng-class="{'address_editing ':isEditPersonalDetails}"
+              resize-address ng-model="address.SubDistrict" ng-disabled="!isEditPersonalDetails">
+            </div>
+            <div class="form-group">
+              <span ng-hide="!address.District && !isEditPersonalDetails">อำเภอ </span><input type="text" class="form-control inline-block address_display" ng-class="{'address_editing ':isEditPersonalDetails}"
+              resize-address ng-model="address.District" ng-disabled="!isEditPersonalDetails">
+            </div>
+            <div class="form-group">
+              <span ng-hide="!address.Province && !isEditPersonalDetails">จังหวัด </span><input type="text" class="form-control inline-block address_display" ng-class="{'address_editing ':isEditPersonalDetails}"
+              resize-address ng-model="address.Province" ng-disabled="!isEditPersonalDetails">
+            </div>
+            <div class="form-group">
+              <span ng-show="isEditPersonalDetails">ระหัสไปรษณีย์ </span><input type="text" class="form-control inline-block address_display" ng-class="{'address_editing ':isEditPersonalDetails}"
+              resize-address ng-model="address.PostCode" ng-disabled="!isEditPersonalDetails">
+            </div>
+            <span class="glyphicon glyphicon-trash trash_c" aria-hidden="true" ng-click="deleteItem(address)" ng-show="isEditPersonalDetails"></span>
+          </form>
+        </div>
 
         <label class="number-label"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>  เบอร์ติอต่อ 
           <span class="glyphicon glyphicon-plus" aria-hidden="true" ng-show="isEditPersonalDetails" ng-click="addNumberContact();"></span>
         </label>
-      <div ng-repeat="phone in person.PhoneNumberList">
+      <div ng-repeat="phone in person.PhoneNumberList" ng-hide="phone.Mode == 'DEL'">
         <a ng-href="{{tel}}{{phone.PhoneNumber}}" ng-click="$event.stopPropagation();" ng-hide="isEditPersonalDetails">{{phone.PhoneNumber}}</a>
-        <img class="phone_provider_logo" ng-src="{{phone.ProviderLogo}}" ng-hide="isEditPersonalDetails"> 
+        
+        <img class="phone_provider_logo" src="images/dtac.png" ng-if="phone.PhoneProvider == 'DTAC'" ng-hide="isEditPersonalDetails"> 
+        <img class="phone_provider_logo" src="images/ais.png" ng-if="phone.PhoneProvider == 'AIS'" ng-hide="isEditPersonalDetails"> 
+        <img class="phone_provider_logo" src="images/truemove.png" ng-if="phone.PhoneProvider == 'TRUEMOVE'" ng-hide="isEditPersonalDetails"> 
+        
         <input type="text" class="form-control ht-25 min-wd-60 et_phone_number sm-vertical-middle" ng-class="{'text_display':!isEditPersonalDetails}"
         maxlength="11" ng-model="phone.PhoneNumber" ng-show="isEditPersonalDetails">
         <div class="dropdown modal_company_dd" ng-show="isEditPersonalDetails">
-            <button class="btn dropdown-toggle sm-vertical-middle sm-button-dropdown" type="button" data-toggle="dropdown">
-              {{phone.PhoneProvider}} <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-              <li ng-repeat="provider in PhoneProviderList" ng-click="onDropdownAction(phone, 'PHONE',provider)"><a>{{provider.PhoneProvider}}</a></li>
-            </ul>
-          </div>
+          <button class="btn dropdown-toggle sm-vertical-middle sm-button-dropdown" type="button" data-toggle="dropdown">
+            {{phone.PhoneProvider}} <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li ng-repeat="provider in PhoneProviderList" ng-click="onDropdownAction(phone, 'PHONE',provider)"><a>{{provider.PhoneProvider}}</a></li>
+          </ul>
+        </div>
+        <span class="glyphicon glyphicon-trash trash_c" aria-hidden="true" ng-click="deleteItem(phone)" ng-show="isEditPersonalDetails"></span>
       </div>
     </div>
   </div>

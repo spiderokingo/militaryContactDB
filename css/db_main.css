@@ -379,3 +379,17 @@ span.menu img{
   font-size: 15px;
   color: #555;
 }
+
+.address_title .glyphicon-trash {
+  padding-top: 3px;
+}
+
+.trash_c {
+    margin: 5px;
+    /* padding-top: 3px; */
+    vertical-align: middle;
+}
+
+.css-form input.ng-invalid {
+    border: 1px solid #FA787E;
+  }

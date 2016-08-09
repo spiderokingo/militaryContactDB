@@ -169,6 +169,12 @@ app.controller('PersonalDetailModalCtrl', function ($scope, $uibModalInstance, P
 			toaster.pop("success","Saved Successful");
 			isEditSaved = true;
 		});
+		
+		angular.forEach($scope.person.PhoneNumberList, function(phone){
+			if(phone.PhoneNumber == ""){
+				phone.Mode = "DEL";
+			}
+		});
 	}
 
 	$scope.uploadImage = function (files) {
@@ -215,13 +221,30 @@ app.controller('PersonalDetailModalCtrl', function ($scope, $uibModalInstance, P
 	}
 
 	$scope.addNumberContact = function () {
-		if($scope.isEditPersonalDetails){
 			$scope.person.PhoneNumberList.push({
 				PhoneNumber: "",
 				PhoneProvider: "DTAC",
-				ProviderLogo: "images/dtac.png"
+				ProviderLogo: "images/dtac.png",
+				Mode: "INS"
 			});
-		}
+	}
+
+	$scope.addAddress = function () {
+		$scope.person.Address.push(	{
+			HouseNumber: "",
+			Moo: "",
+			Lane: "",
+			Road: "",
+			SubDistrict: "",
+			District: "",
+			Province: "",
+			PostCode: "",
+			Mode: "INS"
+		});
+	}
+
+	$scope.deleteItem = function (item) {
+		item.Mode = "DEL"
 	}
 
 	$scope.close = function(){

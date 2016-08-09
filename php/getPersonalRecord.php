@@ -31,8 +31,8 @@ while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
     	$outp .= '{"ID":"'.$rs["PersonalID"].'"';
 		$outp .= ',"ImagePath":"'.$rs["Picture"].'"';
 		$outp .= ',"TitleName":"'. $rs["TitleName"].'"';
-		$outp .= ',"FirstName":"'. $rs["Name"].'"';
-		$outp .= ',"LastName":"'. $rs["Sername"].'"';
+		$outp .= ',"FirstName":"'. $rs["FirstName"].'"';
+		$outp .= ',"LastName":"'. $rs["LastName"].'"';
 		$outp .= ',"NickName":"'. $rs["NickName"].'"';
 
 		$outp2 = "";
