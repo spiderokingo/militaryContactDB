@@ -42,7 +42,7 @@ app.controller('personalController', function($scope, $http, $uibModal, $log, $r
 			$scope.TotalItems = res.TotalItems;
 
 			angular.forEach($scope.PersonalRecord, function(person) {
-  			person.ImageFullPath = "images/" + person.ImagePath;
+  			// person.ImageFullPath = "images/" + person.ImagePath;
 
 				angular.forEach(person.PhoneNumberList, function(phone) {
 					phone.noProvider = false;

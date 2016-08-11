@@ -8,11 +8,16 @@ ob_start();
 
 $outp = "";
 
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
+// header("Access-Control-Allow-Origin: *");
+// header("Content-Type: application/json; charset=UTF-8");
 
-$postData = file_get_contents("php://input");
-$data = json_decode($postData);
+if(isset($_POST["Mode"]) == false){
+    $_POST = json_decode(file_get_contents('php://input'), true);
+    }
+
+   $Mode = $_POST["Mode"];
+   $Username = $_POST["Username"];
+   $Password = $_POST["Password"];
 
 include ("db_connect.php");
 $conn = new mysqli($host, $username, $password, $database);
@@ -20,9 +25,9 @@ $conn = new mysqli($host, $username, $password, $database);
 $result = $conn->query("SET NAMES UTF8");
 
 //-----  ตรวจสอบ Username Password  -----
-if($data->Mode=="LOGIN"){
+if($Mode=="LOGIN"){
 
-$result = $conn->query("SELECT * FROM personal WHERE CitizenID='".$data->Username."' and Password='".$data->Password."'");
+$result = $conn->query("SELECT * FROM personal WHERE CitizenID='".$Username."' and Password='".$Password."'");
 
 if ($result->num_rows == 1) {
 $rs = $result->fetch_array(MYSQLI_ASSOC);
@@ -31,8 +36,8 @@ $rs = $result->fetch_array(MYSQLI_ASSOC);
     $outp .= ',"Username":"'.$rs["CitizenID"].'"';
     $outp .= ',"MilitaryID":"'.$rs["MilitaryID"].'"';
     $outp .= ',"TitleName":"'.$rs["TitleName"].'"';
-    $outp .= ',"FirstName":"'. $rs["Name"].'"';
-	$outp .= ',"LastName":"'. $rs["Sername"].'"';
+    $outp .= ',"FirstName":"'. $rs["FirstName"].'"';
+	$outp .= ',"LastName":"'. $rs["LastName"].'"';
 	$outp .= ',"Permission":"'. $rs["Permission"].'"';
 	$outp .= '}';
 }else{

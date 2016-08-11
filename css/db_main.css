@@ -133,6 +133,11 @@ span.menu img{
   height: 100px;
 }
 
+.card_img #img_contact {
+  border-radius: 15px;
+  padding: 3px;
+}
+
 .contact_card{
   width: 300px;
   padding-top: 3px;
@@ -154,7 +159,7 @@ span.menu img{
 }
 
 .phone_provider_logo {
-  max-width: 45px;
+  max-width: 30px;
 }
 
 .details_modal img{

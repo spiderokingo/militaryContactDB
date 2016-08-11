@@ -17,6 +17,15 @@ app.controller('loginController', function($scope, $location, localStorageServic
 
     $scope.login = function(){
 
+        // var request = $http({
+		// 	method: "POST",
+		// 	url: "php/androidLogin.php",
+        //     data: {'Mode': "LOGIN", 'Username': $scope.user.identityId, 'Password': $scope.user.militaryId},
+		// 	headers: { 'Content-Type': 'application/json' }
+		// }).then(function (res) {
+        //         console.log(res);
+        // });
+
         var request = $http({
 			method: "POST",
 			url: "php/loginValidate.php",

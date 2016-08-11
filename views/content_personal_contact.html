@@ -9,8 +9,8 @@
   </center>
 
   <div class="card_container ft-lt" ng-repeat="person in PersonalRecord | filter:db_search" ng-click="personal_detail_modal(person);">
-      <div class="card_img ft-lt">
-        <img class="w-h-100per img-circle" fallback-src="personal_image/person.png" ng-src="{{person.ImageFullPath}}">
+      <div class="card_img ft-lt" id="img_container">
+        <img class="w-h-100per" id="img_contact" fallback-src="personal_image/person.png" ng-src="{{person.ImageFullPath}}">
       </div>
       <div class="contact_card ft-lt">
           <span> <b> {{person.TitleName}} {{person.FirstName }} {{person.LastName}} </b></span>

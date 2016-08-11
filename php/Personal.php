@@ -189,8 +189,8 @@ if($data->Mode == "UPDATE"){
 			case "EDIT" :
 				$sql_PNL = "UPDATE personal_phone SET ";
 				$sql_PNL .= "PhoneNumber='".$PhoneNumberList[$i]->PhoneNumber."'";
-				$sql_PNL .= "PhoneProvider='".$PhoneNumberList[$i]->PhoneProvider."'";
-				$sql_PNL .= "DateTime='".$time."'";
+				$sql_PNL .= ", PhoneProvider='".$PhoneNumberList[$i]->PhoneProvider."'";
+				$sql_PNL .= ", DateTime='".$time."'";
 				$sql_PNL .= " WHERE ID='".$PhoneNumberList[$i]->ID."'";
 				$statusPhoneNumber = "Edit ".($conn->query($sql_PNL) === TRUE? "Success":"False");
 				break;

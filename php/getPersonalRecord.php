@@ -12,6 +12,10 @@ header("Content-Type: application/json; charset=UTF-8");
 $postData = file_get_contents("php://input");
 $data = json_decode($postData);
 
+//----- Path เก็บรูป -----------------------------------
+$ImagePath = "personal_image/";
+$time = date("Y-m-d H:i:s");
+
 include ("db_connect.php");
 $conn = new mysqli($host, $username, $password, $database);
 
@@ -29,7 +33,7 @@ while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
 	if($result2->num_rows > 0){
     	if ($outp != "") {$outp .= ",";}
     	$outp .= '{"ID":"'.$rs["PersonalID"].'"';
-		$outp .= ',"ImagePath":"'.$rs["Picture"].'"';
+		$outp .= ',"ImageFullPath":"'.$ImagePath.$rs["ImageName"].'"';
 		$outp .= ',"TitleName":"'. $rs["TitleName"].'"';
 		$outp .= ',"FirstName":"'. $rs["FirstName"].'"';
 		$outp .= ',"LastName":"'. $rs["LastName"].'"';
