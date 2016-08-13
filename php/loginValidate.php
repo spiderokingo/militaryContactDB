@@ -13,11 +13,7 @@ $outp = "";
 
 if(isset($_POST["Mode"]) == false){
     $_POST = json_decode(file_get_contents('php://input'), true);
-    }
-
-   $Mode = $_POST["Mode"];
-   $Username = $_POST["Username"];
-   $Password = $_POST["Password"];
+}
 
 include ("db_connect.php");
 $conn = new mysqli($host, $username, $password, $database);
@@ -25,9 +21,9 @@ $conn = new mysqli($host, $username, $password, $database);
 $result = $conn->query("SET NAMES UTF8");
 
 //-----  ตรวจสอบ Username Password  -----
-if($Mode=="LOGIN"){
+if($_POST["Mode"]=="LOGIN"){
 
-$result = $conn->query("SELECT * FROM personal WHERE CitizenID='".$Username."' and Password='".$Password."'");
+$result = $conn->query("SELECT * FROM personal WHERE CitizenID='".$_POST["Username"]."' and Password='".$_POST["Password"]."'");
 
 if ($result->num_rows == 1) {
 $rs = $result->fetch_array(MYSQLI_ASSOC);
