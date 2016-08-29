@@ -6,3 +6,5 @@ personal_image/
 .vscode/launch.json
 impxls/
 app/app-debug.apk
+php/phpqrcode/
+jquery/jquery-1.12.4.min.js

@@ -6,6 +6,8 @@ ob_start();
 //	exit();
 //}
 
+$time = date("Y-m-d H:i:s");
+$ImagePath = "personal_image/";
 $outp = "";
 
 // header("Access-Control-Allow-Origin: *");
@@ -23,19 +25,24 @@ $result = $conn->query("SET NAMES UTF8");
 //-----  ตรวจสอบ Username Password  -----
 if($_POST["Mode"]=="LOGIN"){
 
-$result = $conn->query("SELECT * FROM personal WHERE CitizenID='".$_POST["Username"]."' and Password='".$_POST["Password"]."'");
+$result = $conn->query("SELECT * FROM personal WHERE IdentityID='".$_POST["Username"]."' and Password='".$_POST["Password"]."'");
 
 if ($result->num_rows == 1) {
 $rs = $result->fetch_array(MYSQLI_ASSOC);
     $outp = '{"result":true';
     $outp .= ',"message":"Login Successfull"';
-    $outp .= ',"Username":"'.$rs["CitizenID"].'"';
+	$outp .= ',"ImageFullPath":"'.$ImagePath.$rs["ImageName"].'"';
+    $outp .= ',"PersonalID":"'.$rs["PersonalID"].'"';
+    $outp .= ',"Username":"'.$rs["IdentityID"].'"';
     $outp .= ',"MilitaryID":"'.$rs["MilitaryID"].'"';
     $outp .= ',"TitleName":"'.$rs["TitleName"].'"';
-    $outp .= ',"FirstName":"'. $rs["FirstName"].'"';
-	$outp .= ',"LastName":"'. $rs["LastName"].'"';
-	$outp .= ',"Permission":"'. $rs["Permission"].'"';
+    $outp .= ',"FirstName":"'.$rs["FirstName"].'"';
+	$outp .= ',"LastName":"'.$rs["LastName"].'"';
+	$outp .= ',"Permission":"'.$rs["Permission"].'"';
 	$outp .= '}';
+
+	$conn->query("UPDATE personal SET DateLogin='".$time."' WHERE PersonalID='".$rs["PersonalID"]."'");
+
 }else{
    $outp = '{"result":false,"message":"Login Failed"}';
    }

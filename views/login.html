@@ -3,12 +3,12 @@
 <div class="login-container">
     <div class="table-cell">
         <img class="login-logo" src="images/login_logo.png"/>
-        <div class="login-head">ค้นหาเบอร์โทรศัพท์</div>
+        <div class="login-head">โปรแกรมฐานข้อมูล</div>
         <div class="login-et">
-            <input type="text" class="form-control" ng-class="{'inp-err': isLoginFailed}" ng-change="setLoginFailed(false)" placeholder="รหัสบัตรประชาชน" ng-model="user.identityId"/>
-            <input type="password" class="form-control" ng-class="{'inp-err': isLoginFailed}" ng-change="setLoginFailed(false)"  placeholder="รหัสทหาร 10 หลัก" ng-model="user.militaryId" ng-enter="login();"/>
+            <input type="text" class="form-control" ng-class="{'inp-err': isLoginFailed}" ng-change="setLoginFailed(false)" placeholder="หมายเลขบัตรประชาชน" ng-model="user.identityId"/>
+            <input type="password" class="form-control" ng-class="{'inp-err': isLoginFailed}" ng-change="setLoginFailed(false)"  placeholder="หมายเลขประจำตัวทหาร" ng-model="user.militaryId" ng-enter="login();"/>
             <input type="button" class="btn btn-primary btn-app" ng-click="login();" value="Login"/>
-        <div class="login-footer">** Login ครั้งแรกด้วยเลขบัตรประชาชนและเลข 10 หลักเพื่อแสดงตัวตนผู้เข้าใช้งานระบบ **</div>
+        <div class="login-footer">** Login ครั้งแรกด้วยเลขบัตรประชาชนและเลขประจำตัวทหารเพื่อแสดงตัวตนผู้เข้าใช้งานระบบ **</div>
         </div>
     </div>
 </div>

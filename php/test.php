@@ -1,24 +1,23 @@
 <?
 include ("db_connect.php");
-
-// Create connection
 $conn = new mysqli($host, $username, $password, $database);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
+$result = $conn->query("SET NAMES UTF8");
 
-$conn->query("SET NAMES UTF8");
-
-$sql = "INSERT INTO personal (CitizenID, Password, Permission, TitleName, Name, Sername, BirthDay,DateTime)
-VALUES ('112233445566774', '1234', 'USER','นาย', 'สมชาย', 'จรดปลายเท้า', '".date("Y-m-d")."', '".date("Y-m-d H:i:s")."')";
-
-if ($conn->query($sql) === TRUE) {
-    $last_id = (string)$conn->insert_id;
-    echo "New record created successfully. Last inserted ID is: " . $last_id;
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+if($Mode=="INSERT"){
+    $ImgAll[]="AAA";
+	$sql_Add = "UPDATE personal SET ";
+	$sql_Add .= "ImageAll='{AAA,BBB,CCC}'";
+	$sql_Add .= " WHERE PersonalID='00001'";
+$conn->query($sql_Add);
 }
+
+//	$resultImg = $conn->query("SELECT * FROM personal WHERE PersonalID='".$rs["PersonalID"]."'");
+	$resultImg = $conn->query("SELECT * FROM personal WHERE PersonalID='00001'");
+	$rsImg = $resultImg->fetch_array(MYSQLI_ASSOC);
+	$ImageAll = $rsImg["ImageAll"];
+    $len = count($ImageAll);
+    echo $len;
+
 
 $conn->close();
 ?>

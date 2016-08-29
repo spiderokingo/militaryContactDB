@@ -1,0 +1,156 @@
+{
+	"id": "64be9b6e-c076-fc07-11ea-488f3410a890",
+	"name": "Infantry43",
+	"description": "",
+	"order": [
+		"f1371b1d-1d96-57d8-5d8b-05fd990d7dc2",
+		"4e895afc-b50e-8657-2b4f-0b158fe1baa9",
+		"6a75a398-2dfa-d698-6d42-10f59c083df8",
+		"0f96c880-0bfa-1c4c-ff69-ec05bafe5f4a"
+	],
+	"folders": [],
+	"timestamp": 1471323152378,
+	"owner": "917038",
+	"public": false,
+	"published": false,
+	"requests": [
+		{
+			"id": "0f96c880-0bfa-1c4c-ff69-ec05bafe5f4a",
+			"headers": "",
+			"url": "http://192.168.1.254/db/php/getQR.php",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "64be9b6e-c076-fc07-11ea-488f3410a890",
+			"data": [
+				{
+					"key": "Mode",
+					"value": "WEAPON",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "WeaponNumber",
+					"value": "1234567",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "get QR Weapon Mode",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1471324576112,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "4e895afc-b50e-8657-2b4f-0b158fe1baa9",
+			"headers": "",
+			"url": "http://192.168.1.254/db/php/getDepositDetails.php",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "64be9b6e-c076-fc07-11ea-488f3410a890",
+			"data": [
+				{
+					"key": "Mode",
+					"value": "WEAPON",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "WeaponNumber",
+					"value": "1234567",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "get Deposit Details",
+			"description": "Get Waepon and Withdraw details",
+			"descriptionFormat": "html",
+			"time": 1471323379196,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "6a75a398-2dfa-d698-6d42-10f59c083df8",
+			"headers": "",
+			"url": "http://192.168.1.254/db/php/getQR.php",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "64be9b6e-c076-fc07-11ea-488f3410a890",
+			"data": [
+				{
+					"key": "Mode",
+					"value": "USER",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "IdentityID",
+					"value": "1509901148832",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "get QR User Mode",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1471324540498,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		},
+		{
+			"id": "f1371b1d-1d96-57d8-5d8b-05fd990d7dc2",
+			"headers": "",
+			"url": "http://192.168.1.254/db/php/loginValidate.php",
+			"pathVariables": {},
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "64be9b6e-c076-fc07-11ea-488f3410a890",
+			"data": [
+				{
+					"key": "Mode",
+					"value": "LOGIN",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "Username",
+					"value": "1509901148832",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "Password",
+					"value": "1234",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "Login",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1471323165574,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {}
+		}
+	]
+}

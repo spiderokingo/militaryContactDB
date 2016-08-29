@@ -32,7 +32,7 @@ if($_POST["Mode"] == "LIST"){
 	$sql = "SELECT * FROM personal ";
 
 	//---- ตรวจสอบถ้า SearchText ไม่เท่ากับค่าว่าง ให้ทำการ Search -----------------
-	if($data->SearchText!=""){
+	if($_POST["SearchText"] != ""){
 		$sql .= "WHERE FirstName LIKE '%".$_POST["SearchText"]."%' or LastName LIKE '%".$_POST["SearchText"]."%' or NickName LIKE '%".$_POST["SearchText"]."%'";
 	}
 	$result = $conn->query($sql);
@@ -65,7 +65,7 @@ $rs = $result->fetch_array(MYSQLI_ASSOC);
     $outp .= '{"ID":"'.$rs["PersonalID"].'"';
 	$outp .= ',"ImageFullPath":"'.$ImagePath.$rs["ImageName"].'"';
 	$outp .= ',"ImageName":"'.$rs["ImageName"].'"';
-	$outp .= ',"CitizenID":"'.$rs["CitizenID"].'"';
+	$outp .= ',"IdentityID":"'.$rs["IdentityID"].'"';
 	$outp .= ',"TitleName":"'. $rs["TitleName"].'"';
 	$outp .= ',"FirstName":"'. $rs["FirstName"].'"';
 	$outp .= ',"LastName":"'. $rs["LastName"].'"';
@@ -123,7 +123,7 @@ if($_POST["Mode"] == "UPDATE"){
 	$obj = $_POST["obj"];
 
 	$sql = "UPDATE personal SET ";
-	$sql .= "CitizenID='".$obj["CitizenID"]."'";
+	$sql .= "IdentityID='".$obj["IdentityID"]."'";
 	$sql .= ", ImageName='".$obj["ImageName"]."'";
 	$sql .= ", TitleName='".$obj["TitleName"]."'";
 	$sql .= ", FirstName='".$obj["FirstName"]."'";
@@ -211,6 +211,13 @@ if($_POST["Mode"] == "UPDATE"){
 				break;
 		}
 	}
+
+	//------- Images Update -------//
+//		$resultImg = $conn->query("SELECT * FROM personal WHERE PersonalID='".$rs["PersonalID"]."'");
+//		$rsImg = $resultImg->fetch_array(MYSQLI_ASSOC);
+//		$ImageAll = $rsImg["ImageAll"];
+
+
 
 	if ($conn->query($sql) === TRUE){
     	$outp = '{"result":"success","message":"updated successfully","statusUpdate":[{"Mititary":"'.$statusMititary.'","Address":"'.$statusAddress.'","PhoneNumber":"'.$statusPhoneNumber.'"}]}';
