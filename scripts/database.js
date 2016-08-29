@@ -11,6 +11,7 @@ app.controller('tabController', function($scope, $http, $uibModal, $log, $state,
 	$scope.db_tabs = [
     {id:0, title:'หน้าแรก', url: 'views/content_home.html'},
     {id:1, title:'ข้อมูลบุคคล', url: 'views/content_personal_details.html'},
+    {id:2, title:'ปริ้น QR Code', url: 'views/content_qr_code_printing.html'},
     {id:2, title:'ข้อมูลอาวุธ'},
     {id:3, title:'สป 2-4' },
     {id:4, title:'ข้อมูลเบอร์ติดต่อ', url: 'views/content_personal_contact.html' },

@@ -1,0 +1,97 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+<style type="text/css">
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+.QRpers {
+	position:relative;
+	float:left;
+	margin: 3px;
+	width:145px;
+	height:125px;
+	border:1px solid #CCC;
+	border-radius:4px;
+	text-align:center;
+	font-size:11px;
+}
+.ListPers {
+	position:relative;
+	margin: 3px;
+	width:300px;
+	height:50px;
+	float:left;
+	border:1px solid #CCC;
+	border-radius:4px;
+	text-align:left;
+	font-size:14px;
+	text-align:left;
+	vertical-align:middle;
+}
+.imgPers {
+	border-radius: 20px;
+	margin: 4px;
+	width:40px;
+}
+.imgQR {
+	margin: 5px;
+}
+</style>
+<script src="../AngularJs/angular.min.js" type="text/javascript"></script>
+<script>
+
+var app = angular.module('angular_post_demo', []);
+
+app.controller('PersonalList', function ($scope, $http) {
+
+	$scope.perslist = function () {
+		
+		var request = $http({
+			method: "post",
+			url: "../php/Personal.php",
+			data: {
+				Mode: "LIST",
+				Amount: "1",
+				Page: "1"
+			},
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+		});
+		
+		request.success(function (data) {
+//			console.log(data.PersonalRecord);
+			$scope.PersonalRecord = data.PersonalRecord;
+//			$scope.BtnList = " Print QR Code ";
+		});		
+	}
+
+	$scope.qrprint = function () {
+		var PrintQR = $scope.IDpers;
+		alert(PrintQR);
+		console.log(PrintQR);
+	}
+
+});
+
+
+//function GenQR(id,data,level,size){
+//	$.post("phpqrcode/index.php", {data:data,level:level,size:size}, function(result){
+//		$("#"+id).html(result);
+//	});
+//}
+</script>
+</head>
+
+<body>
+<div ng-app="angular_post_demo" ng-controller="PersonalList"><form id="form1">
+	<div class="ListPers" ng-repeat="x in PersonalRecord"><div style="float:left; width:50px;"><img fallback-src="../personal_image/person.png" ng-src="../{{x.ImageFullPath}}" class="imgPers" /></div><div style="float:left; width:200px; margin:3px;"><div>{{x.TitleName}} {{x.FirstName}}  {{x.LastName}}</div><div>{{x.ID}}</div></div><div style="float:left; width:30px; margin:3px; text-align:center;"><div>QR</div><div><input type="checkbox" ng-model="IDpers" ng-true-value="'{{x.ID}}'" ng-false-value="''"></div><div>{{IDpers}}</div></div></div>
+	<div style="position:absolute; right:5px; bottom:5px;"><input type="button" ng-click="qrprint()" ng-model="BtnPrint" value=" Print "><input type="button" ng-click="perslist()" ng-model="BtnList" value=" List "></div>
+</form>
+</div>
+</body>
+</html>
