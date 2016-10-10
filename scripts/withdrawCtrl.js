@@ -83,8 +83,10 @@ app.controller('withdrawCtrl', function($scope, focus, $rootScope, $http, toaste
 				angular.merge(item, withDrawRes);
 				toaster.pop("success",withDrawRes.message);
 				//Do not create another one if just edit
-				if(!$scope.isEditMode)
+				if(!$scope.isEditMode){
+					$scope.isEditMode = false;
 					$scope.withdrawList.push(angular.copy($scope.initailObj));
+				}
 			}else{
 				//Fails to withdraw an item
 				toaster.pop("error",withDrawRes.message);

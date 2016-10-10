@@ -10,7 +10,7 @@
                 </div>
                 <div class="width-350 personal_details_card ft-lt">
                     <span> <b> {{withdraw.WeaponType}}({{withdraw.WeaponNumber}}) </b> {{withdraw.WeaponCompany}} 
-                        <span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click="onEdit(withdraw,'WEAPON')"></span>
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click="onEdit(withdraw,'WEAPON')" ng-hide="withdraw.postReturnServer"></span>
                     </span>
                 </div>
             </div>
@@ -46,5 +46,7 @@
   </div>
   <div class="modal-footer">
       <button class="btn btn-primary" type="button" ng-click="save()">ตกลง</button>
+      
+      <button class="btn" type="button" ng-click="cancel()">ยกเลิก</button>
   </div>
 </script>

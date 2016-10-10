@@ -56,11 +56,8 @@ app.controller('returnCtrl', function($scope, focus, $rootScope, $http, toaster,
 
 		request.success(function (res) {
 			if(res.result){
+
 				if(item.withdrawPersonID != res.PersonalID){
-					angular.merge(item, res);
-					item.userImage = res.ImageFullPath;
-					item.isIdentityInput = false;
-					item.isIdentityShow = true;
 
 					var message = "อาวุธหมายนี้ถูกเบิกออกโดย" + item.PersonalName + "และจะส่งคืนโดย"
                                 + res.TitleName + " " + res.FirstName + "  " + res.LastName;
@@ -76,10 +73,19 @@ app.controller('returnCtrl', function($scope, focus, $rootScope, $http, toaster,
 					}
 					});
 					modalInstance.result.then(function (goodResult) {
-						if(goodResult)
+						if(goodResult){
+							angular.merge(item, res);
+							item.userImage = res.ImageFullPath;
+							item.isIdentityInput = false;
+							item.isIdentityShow = true;	
 							$scope.postReturnToServer(item);
+						}
 					});
 				}else{
+					angular.merge(item, res);
+					item.userImage = res.ImageFullPath;
+					item.isIdentityInput = false;
+					item.isIdentityShow = true;	
 					$scope.postReturnToServer(item);
 				}
 
@@ -107,8 +113,11 @@ app.controller('returnCtrl', function($scope, focus, $rootScope, $http, toaster,
 				angular.merge(item, withDrawRes);
 				toaster.pop("success",withDrawRes.message);
 				//Do not create another one if just edit
-				if(!$scope.isEditMode)
+				if(!$scope.isEditMode){
+					item.postReturnServer = true;
+					$scope.isEditMode = false;
 					$scope.withdrawList.push(angular.copy($scope.initailObj));
+				}
 			}else{
 				//Fails to withdraw an item
 				toaster.pop("error",withDrawRes.message);
@@ -117,37 +126,45 @@ app.controller('returnCtrl', function($scope, focus, $rootScope, $http, toaster,
 	}
 
 	//Edit user
-	$scope.onEdit = function(obj, type){
-		//POST to server, delete the record
-		var withdrawRequest = $http({
-			method: "POST",
-			url: "php/getQR.php",
-			data: { 'Mode': "DELETE", 
-					'WithdrawID': obj.WithdrawID,
-					'PersonalID': obj.PersonalID,
-					'WeaponID': obj.WeaponID,}
-		});
-		withdrawRequest.success(function (deleteRes) {
-			console.log("Delete success");
+	$scope.onEdit = function(item, type){
+		if(item.postReturnServer){
+			//POST to server, delete the record
+			var withdrawRequest = $http({
+				method: "POST",
+				url: "php/getQR.php",
+				data: { 'Mode': "DELETE", 
+						'WithdrawID': item.WithdrawID,
+						'PersonalID': item.PersonalID,
+						'WeaponID': item.WeaponID,}
+			});
+			withdrawRequest.success(function (deleteRes) {
+				console.log("Delete success");
+				$scope.setEditUI(item,type);
+			});
+
+		}else{
+			$scope.setEditUI(item,type);
+		}
+	}
+
+	$scope.setEditUI = function(item, type){
 			$scope.isEditMode = true;
 
 			switch (type) {
 				case 'IDENTITY':
 					
-					obj.isIdentityInput = true;
-					obj.isIdentityShow = false;
+					item.isIdentityInput = true;
+					item.isIdentityShow = false;
 					break;
 				case 'WEAPON':
-					obj.isWeaponInput = true;
-					obj.isWeaponShow = false;
+					item.isWeaponInput = true;
+					item.isWeaponShow = false;
 					
 					//Hide text field
-					if(obj.isWeaponInput)
-						obj.isWeaponInput = false;
+					if(item.isIdentityInput)
+						item.isIdentityInput = false;
 					break;
 			}
-		});
-
 	}
 
 	$scope.init();
@@ -165,6 +182,10 @@ app.controller('ReturnModalCtrl', function ($scope, $uibModalInstance, $http, ob
 
 	$scope.save = function(){
 		$uibModalInstance.close(true);
+  	};
+	  
+	$scope.cancel = function(){
+		$uibModalInstance.close();
   	};
 
 	$scope.init();

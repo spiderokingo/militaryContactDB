@@ -10,6 +10,7 @@
 
 .detail_holder{
     display: inline-block;
+    margin-left: 20px;
 }
 
 .half_window{
@@ -44,11 +45,7 @@
     height: 100%;
     position: absolute;
     left: 0;
-    background: #b5e3ea; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(white, #b5e3ea); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(whitered, #b5e3ea); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(white, #b5e3ea); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(white, #b5e3ea); /* Standard syntax */
+    background: rgba(181,227,234,0.25); /* For browsers that do not support gradients */
 }
 
 .grad2 {
@@ -56,9 +53,5 @@
     height: 100%;
     position: absolute;
     left: 0;
-    background: #f5cdcd; /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(white, #f5cdcd); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(whitered, #f5cdcd); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(white, #f5cdcd); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(white, #f5cdcd); /* Standard syntax */
+    background: rgba(245,205,205,0.25); /* For browsers that do not support gradients */
 }
