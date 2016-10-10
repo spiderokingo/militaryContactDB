@@ -1,0 +1,10 @@
+
+<div class="qr_main_container">
+	<div class="qr_holder" ng-repeat="person in selectedList">
+		<div class="qr_item">
+			<qrcode version="{{version}}" error-correction-level="{{level}}" size="{{size}}" data="{{person.IdentityID}}"></qrcode>
+			<div class="qr_code_text">{{person.TitleName}} {{person.FirstName}} {{person.LastName}}</div>
+			<div class="qr_code_text">{{person.IdentityID}}</div>
+		</div>
+	</div>
+</div>

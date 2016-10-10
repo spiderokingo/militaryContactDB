@@ -1,0 +1,54 @@
+
+.card_container.active{
+    background-color: #c7c6c6 !important;
+} 
+
+.qr_search{
+    width: 100%;
+    float: left;
+    display: flex;
+}
+
+.qr_search input{
+    display: inline-block;
+}
+
+.qr_search button{
+    width: 150px;
+    vertical-align: initial;
+    margin-left: 5px;
+}
+
+.qr_holder qrcode canvas{
+    display: block !important;
+    margin: auto !important;
+    height: 28px;
+}
+
+.qr_holder{
+	
+	border: 1px solid black;
+	border-radius: 7px;
+    height: 48.5px;
+    width: 72px;
+    display: inline-block;
+	margin: 5.5px;
+
+    /*width: 135px;
+    padding: 3px;
+    height: 35px;*/
+}
+
+.qr_item{
+    padding-top: 2px;
+	width: 100%;
+	height: 100%;
+}
+
+.qr_main_container{
+}
+
+.qr_code_text{
+    font-size: 0.4em;
+    text-align: center;
+}

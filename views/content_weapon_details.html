@@ -1,0 +1,104 @@
+<div ng-controller="weaponController">
+  <center>
+    <div class="search_container  qr_search">
+        <input type="text" class="form-control" ng-model="search" placeholder="Search" ng-change="onSearch()"/>
+        <button class="btn btn-primary" ng-click="onOption()">{{filterText}}</button>
+    </div>
+  </center>
+
+  <div class="boarder_2px card_container ft-lt" ng-repeat="weapon in WeaponRecord" 
+  ng-class="{'green_border': weapon.WeaponStatus == 'Available','red_border': weapon.WeaponStatus == 'Unavailable',
+  'yellow_boarder': weapon.WeaponStatus == 'Repair'}" ng-click="onWeaponDetail(weapon)">
+      <div class="personal_card_img ft-lt">
+        <img class="w-h-100per" fallback-src="images/weapon.png" ng-src="{{weapon.ImageFullPath}}">
+      </div>
+      <div class="weapon_card ft-lt">
+          <span> <b> {{weapon.WeaponType}} </b></span>
+          <div>
+            {{weapon.WeaponNumber}} ({{weapon.WeaponCompany}})
+          </div>
+      </div>
+  </div>
+
+  <div class="personal_detail_footer" >
+    <ul uib-pagination boundary-links="true" total-items="TotalItems"
+    max-size="maxSize" force-ellipses="true" items-per-page="amount" 
+    ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" 
+    next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="getWeaponList()"></ul>
+    <pre class="total_footer">Total Items: {{TotalItems}}</pre>
+  </div>
+</div>
+
+
+<script type="text/ng-template" id="WeaponFilterModalTemplate.html">
+  <div class="modal-header">
+      <h3>เลือกตัวกรอง</h3>
+  </div>
+  <div class="modal-body">
+    <div class="details_modal">
+
+      <div class="text_header">กองร้อย</div>
+      <div class="radio first_radio" ng-repeat="company in CompanyList">
+        <label><input type="radio" ng-model="option.companyOption" name="companyOption" ng-change="onCompanyChange(company.CompanyShort)"
+          ng-value="company.CompanyShort">{{company.CompanyShort}}</label>
+      </div>
+
+      <!--<label class="radio" ng-class="{'first_radio': $index == 0}" ng-repeat="company in CompanyList">
+        <input type="radio" ng-model="option.companyOption" name="companyOption" ng-change="onCompanyChange(company.CompanyShort)"
+          ng-value="company.CompanyShort">{{company.CompanyShort}}
+      </label>-->
+
+      <div class="text_header">ชนิดปืน</div>
+      <div class="radio first_radio" ng-repeat="type in WeaponTypeList">
+        <label><input type="radio" ng-model="option.weaponOption" name="typeOption" ng-change="onWeaponChange(type.WeaponType)"
+          ng-value="type.WeaponType">{{type.WeaponType}}</label>
+      </div>
+
+      <!--<label class="radio" ng-class="{'first_radio': $index == 0}" ng-repeat="type in WeaponTypeList">
+        <input type="radio" ng-model="option.weaponOption" name="typeOption" ng-change="onWeaponChange(type.WeaponType)"
+          ng-value="type.WeaponType">{{type.WeaponType}}
+      </label>-->
+    </div>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary" type="button" ng-click="save()">Save</button>
+  </div>
+</script>
+
+<script type="text/ng-template" id="WeaponDetailModalTemplate.html">
+  <div class="modal-header">
+      <h3>รายละเอียดอาวุธ</h3>
+  </div>
+  <div class="modal-body">
+    <div class="img_modal">
+          <img class="modal_w_h" fallback-src="images/weapon.png"
+               ng-src="{{weaponObj.ImageFullPath}}">
+    </div>
+    <div class="details_modal">
+
+      <div>
+        <span class="weapon_title">ชื่อ</span>
+        <span> {{weaponObj.WeaponType}} </span>
+      </div>
+
+      <div>
+        <span class="weapon_title">หมายเลขปืน</span>
+        <span> {{weaponObj.WeaponNumber}} </span>
+      </div>
+
+      <div>
+        <span class="weapon_title">กองร้อย</span>
+        <span> {{weaponObj.WeaponCompany}} </span>
+      </div>
+
+      
+      <div>
+        <span class="weapon_title">สถานะ</span>
+        <span> {{weaponObj.WeaponStatus}} </span>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary" type="button" ng-click="save()">Close</button>
+  </div>
+</script>

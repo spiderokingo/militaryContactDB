@@ -1,0 +1,39 @@
+@media only screen and (min-width: 768px) {
+    .navbar {
+        border-radius: 4px;
+    }
+}
+
+.navbar-collapse {
+    padding-left: 0px;
+}
+
+.container-fluid {
+    padding-left: 0px;
+}
+
+.navbar-default {
+    background-image: none;
+    background-color: white;
+    border-radius: 0px; 
+    box-shadow: none;
+    
+}
+
+.navbar {
+    position: relative;
+    min-height: 50px;
+     margin-bottom: 0px; 
+     border-bottom: 2px solid #ccc !important; 
+     border: none; 
+}
+
+.navbar-default .navbar-nav li a{
+        color: #00aef9;
+        font-size: 18px;
+}
+
+.navbar-default .navbar-nav li a:hover {
+    background-color: #ebf0f7;
+    color: #50576f;
+}

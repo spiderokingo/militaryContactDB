@@ -1,0 +1,25 @@
+.personal_card_img {
+    width: 50px;
+    height: 50px;
+}
+
+.personal_details_card{
+  width: 250px;
+  padding-top: 12px;
+  padding-left: 5px;
+}
+
+/* Device of width 678*/
+@media only screen and (max-width: 678px) {
+  .personal_card_img  {
+    width: 15%;
+    height: initial;
+    max-width: 40px;
+    margin-top: 5px;
+  }
+
+  .personal_details_card{
+    width: 85%;
+  }
+
+}

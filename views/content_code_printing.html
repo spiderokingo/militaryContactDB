@@ -1,0 +1,30 @@
+<div ng-controller="qrCodeController">
+  <center>
+    <div class="search_container qr_search">
+        <input type="text" class="form-control" ng-model="search" placeholder="Search" ng-change="onSearch()"/>
+        <button class="btn" ng-class="{'btn-default': !isSelectAll}" ng-click="onSelectAll()">{{selectAllText}}</button>
+        <button class="btn btn-primary" ng-click="onPrint()">ปริ้น QR</button>
+    </div>
+  </center>
+
+  <!--<div class="card_container ft-lt" ng-repeat="person in PersonalRecord | filter:search" ng-click="personal_detail_modal(person);">-->
+  <button class="btn card_container ft-lt" ng-model="singleModel" 
+                ng-class="{'active': person.isActive}"
+                ng-click="onSelected(person)" uib-btn-checkbox btn-checkbox-true="1" 
+                btn-checkbox-false="0" ng-repeat="person in PersonalRecord">
+      <div class="personal_card_img ft-lt">
+        <img class="w-h-100per img-circle" fallback-src="personal_image/person.png" ng-src="{{person.ImageFullPath}}">
+      </div>
+      <div class="personal_details_card text-left ft-lt">
+          <span> <b> {{person.TitleName}} {{person.FirstName }} {{person.LastName}} </b></span>
+      </div>
+  </button>
+
+  <div class="personal_detail_footer" >
+    <ul uib-pagination boundary-links="true" total-items="TotalItems"
+    max-size="maxSize" force-ellipses="true" items-per-page="amount" 
+    ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" 
+    next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="getPersonalList()"></ul>
+    <pre class="total_footer">Total Items: {{TotalItems}}</pre>
+  </div>
+</div>
