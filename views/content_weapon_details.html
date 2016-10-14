@@ -2,7 +2,25 @@
   <center>
     <div class="search_container  qr_search">
         <input type="text" class="form-control" ng-model="search" placeholder="Search" ng-change="onSearch()"/>
-        <button class="btn btn-primary" ng-click="onOption()">{{filterText}}</button>
+        <!--<button class="btn btn-primary" ng-click="onOption()">{{filterText}}</button>-->
+        <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+            {{option.companyOption}}
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item dp_cus"  ng-repeat="company in CompanyList" ng-click="onCompanyChange(company.CompanyShort)">{{company.CompanyShort}}</a>
+          </div>
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" 
+          aria-haspopup="true" aria-expanded="false">
+            {{option.weaponOption}}
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item dp_cus"  ng-repeat="type in WeaponTypeList" ng-click="onWeaponChange(type.WeaponType)">{{type.WeaponType}}</a>
+          </div>
+        </div>
     </div>
   </center>
 

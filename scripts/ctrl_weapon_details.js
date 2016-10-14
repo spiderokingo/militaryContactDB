@@ -1,5 +1,7 @@
 app.controller('weaponController', function($scope, $http, $uibModal, $log, $rootScope, $state, localStorageService, $timeout) {
 
+	var allCompany = "ทุกกองร้อย"
+	var allType = "ทุกประเภท"
 	$scope.init = function(){
 
 		$scope.currentPage = 1;
@@ -7,13 +9,15 @@ app.controller('weaponController', function($scope, $http, $uibModal, $log, $roo
 		$scope.search = "";
 		$scope.maxSize = 7;
 		$scope.option = { 
-			companyOption: "เลือกทั้งหมด",
-			weaponOption: "เลือกทั้งหมด"
+			companyOption: allCompany,
+			weaponOption: allType
 		};
 
 		$scope.filterText = "ตัวกรอง";
 
         $scope.getWeaponList();
+		$scope.getCompanyList();
+		$scope.getWeaponTypeList();
 	};
 
 	$scope.getWeaponList = function(){
@@ -21,8 +25,8 @@ app.controller('weaponController', function($scope, $http, $uibModal, $log, $roo
 			method: "POST",
 			url: "php/Weapon.php",
 			data: { 'Mode': "LIST", 'Page': $scope.currentPage, 'Amount': $scope.amount, 'SearchText': $scope.search,
-					'WeaponCompany': $scope.option.companyOption == "เลือกทั้งหมด" ? "": $scope.option.companyOption,
-					 'WeaponType': $scope.option.weaponOption== "เลือกทั้งหมด" ? "": $scope.option.weaponOption}
+					'WeaponCompany': $scope.option.companyOption == allCompany ? "": $scope.option.companyOption,
+					 'WeaponType': $scope.option.weaponOption== allType ? "": $scope.option.weaponOption}
 		});
 
 		request.success(function (res) {
@@ -35,34 +39,6 @@ app.controller('weaponController', function($scope, $http, $uibModal, $log, $roo
 
 	$scope.onSearch = function(){
 		$scope.getWeaponList();
-	}
-
-	$scope.onOption = function(){
-		
-		var modalInstance = $uibModal.open({
-			animation: true,
-			templateUrl: 'WeaponFilterModalTemplate.html',
-			controller: 'FilterModalCtrl',
-			resolve: {
-				option: function() {
-					return $scope.option;
-				}
-			}
-			});
-			modalInstance.result.then(function (modalFilter) {
-				//Check whether the Person Details got edit or not
-				$scope.option = modalFilter;
-				if($scope.option.weaponOption == "เลือกทั้งหมด" && $scope.option.companyOption == "เลือกทั้งหมด"){
-					$scope.filterText = "เลือกตัวกรอง";
-				}else if($scope.option.weaponOption == "เลือกทั้งหมด" ){
-					$scope.filterText = $scope.option.companyOption;
-				}else if($scope.option.companyOption == "เลือกทั้งหมด" ){
-					$scope.filterText = $scope.option.weaponOption;
-				}else{
-					$scope.filterText = $scope.option.companyOption+"/"+$scope.option.weaponOption
-				}
-				$scope.getWeaponList();
-			});
 	}
 
 	$scope.onWeaponDetail = function(obj){
@@ -78,21 +54,6 @@ app.controller('weaponController', function($scope, $http, $uibModal, $log, $roo
 				console.log(modalFilter);
 			});
 	}
-    
-	$scope.init();
-
-});
-
-// 
-// START Weapon Filter Modal Controller
-// 
-app.controller('FilterModalCtrl', function ($scope, $uibModalInstance, $http, option) {
-
-	$scope.init = function () {
-		$scope.option = option;
-		$scope.getCompanyList();
-		$scope.getWeaponTypeList();
-	}
 
 	$scope.getCompanyList = function () {
 		var request =	$http({
@@ -102,7 +63,8 @@ app.controller('FilterModalCtrl', function ($scope, $uibModalInstance, $http, op
 		request.success(function (res) {
 			console.log(res);
 			res.CompanyList.push({
-				CompanyShort: "เลือกทั้งหมด"
+				ID: 0,
+				CompanyShort: allCompany
 			});
 			$scope.CompanyList = res.CompanyList;
 		});
@@ -116,7 +78,7 @@ app.controller('FilterModalCtrl', function ($scope, $uibModalInstance, $http, op
 		request.success(function (res) {
 			console.log(res);
 			res.WeaponTypeList.push({
-				WeaponType: "เลือกทั้งหมด"
+				WeaponType: allType
 			});
 			$scope.WeaponTypeList = res.WeaponTypeList;
 		});
@@ -124,17 +86,16 @@ app.controller('FilterModalCtrl', function ($scope, $uibModalInstance, $http, op
 
 	$scope.onCompanyChange = function(item){
 		$scope.option.companyOption = item;
+        $scope.getWeaponList();
 	}
 
 	$scope.onWeaponChange = function(item){
 		$scope.option.weaponOption = item;
+        $scope.getWeaponList();
 	}
-
-	$scope.save = function(){
-		$uibModalInstance.close($scope.option);
-  	};
-
+    
 	$scope.init();
+
 });
 
 

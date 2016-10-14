@@ -33,3 +33,22 @@
 .weapon_title {
     color: #00aef9;
 }
+
+.dp_cus{
+    color: #00aef9;
+    text-decoration: none;
+    float: left;
+    clear: both;
+    padding: 9px;
+    width: 100%;
+}
+
+.dp_cus:hover {
+    color: #202023;
+    text-decoration: none;
+    background: #9ba7d2;
+}
+
+.btn-group > .btn:first-child {
+    margin-left: 5px;
+}
