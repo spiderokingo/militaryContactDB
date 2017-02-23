@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="css/withdraw.css">
     <link rel="stylesheet" href="css/weapon_details.css">
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/setting.css">
+    <link rel="stylesheet" href="css/report.css">
 
     <!-- Import Script -->
     <script src="AngularJs/angular.min.js"></script>
@@ -31,20 +33,22 @@
 
     <script src="scripts/app.js"></script>
     <script src="scripts/siteService.js"></script>
-    <script src="scripts/database.js"></script>
-    <script src="scripts/login.js"></script>
+    <script src="scripts/ctrl_main.js"></script>
+    <script src="scripts/ctrl_login.js"></script>
     <script src="scripts/ctrl_personal_details.js"></script>
     <script src="scripts/ctrl_weapon_details.js"></script>
-    <script src="scripts/qr_code_ctrl.js"></script>
-    <script src="scripts/qrcodegenarator.js"></script>
-    <script src="scripts/withdrawCtrl.js"></script>
-    <script src="scripts/returnCtrl.js"></script>
+    <script src="scripts/ctrl_qr_code.js"></script>
+    <script src="scripts/ctrl_qrcode_genarator.js"></script>
+    <script src="scripts/ctrl_withdraw.js"></script>
+    <script src="scripts/ctrl_return.js"></script>
+    <script src="scripts/ctrl_setting.js"></script>
+    <script src="scripts/ctrl_home.js"></script>
+    <script src="scripts/ctrl_report.js"></script>
    
-
     <!-- Meta tag -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <title>{{title}}</title>
     <link rel="icon" href="images/icon_db_inf43.png" type="image/x-icon" title="DB Inf43" />
@@ -61,7 +65,13 @@
   <div>
 
       <div ui-view></div>
+        
+    <script type="text/javascript">
+         document.addEventListener('gesturestart', function (e) {
+            e.preventDefault();
+        });
 
+    </script>
   </div>
 
   <toaster-container toaster-options="{'time-out': 2000, 'animation-class': 'toast-top-center'}"></toaster-container>

@@ -1,33 +1,69 @@
-<div class="table_holder">
-  <div class="table_header">Weapon Information</div>
-  <table class="table table-striped">
-    <thead class="thead-default">
-      <tr>
-        <th></th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Username</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
+<div  ng-controller="homeCtrl">
+  <div class="table_holder" ng-hide="isDetails">
+    <div class="table_header">
+      สถานภาพกำลังพล
+    </div>
+    <div class="table-subheader">
+      ประจำวันที่ {{currentDate}}
+    </div>
+    <table class="table table-striped">
+      <thead class="thead-default wd-m font-12-m">
+        <tr>
+          <th></th>
+          <th>ร้อย สสก.</th>
+          <th>ร้อย สสช.</th>
+          <th>ร้อย 1</th>
+          <th>ร้อย 2</th>
+          <th>ร้อย 3</th>
+          <th>รวมยอด</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="amount in companyNumberList">
+          <th class="font-12-m" scope="row" ng-click="detailsOnClicked($index)">{{amount.TitleName}}</th>
+          <td>{{amount.CompanyAssist}}</td>
+          <td>{{amount.CompanySupport}}</td>
+          <td>{{amount.Company1}}</td>
+          <td>{{amount.Company2}}</td>
+          <td>{{amount.Company3}}</td>
+          <td>{{amount.GrandTotal}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div ng-show="isDetails">
+    <button class="btn btn-primary mg-tp-5" type="button" ng-click="exitDetails();">Back</button>
+    <div class="table_holder">
+    <div class="table_header">
+      {{DetailsHeaderName}}
+    </div>
+    <div class="table-subheader">
+      วันที่ {{currentDate}}
+    </div>
+    <table class="table table-striped">
+      <thead class="thead-default font-11-m">
+        <tr>
+          <th></th>
+          <th>ร้อย สสก.</th>
+          <th>ร้อย สสช.</th>
+          <th>ร้อย 1</th>
+          <th>ร้อย 2</th>
+          <th>ร้อย 3</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="amount in StatusList">
+          <th class="row-header" scope="row">{{amount.Company}}</th>
+          <td>{{amount.GrandTotal}}</td>
+          <td>{{amount.Leave}}</td>
+          <td>{{amount.Preset}}</td>
+          <td>{{amount.ServeCommander}}</td>
+          <td>{{amount.Others}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+  
 </div>

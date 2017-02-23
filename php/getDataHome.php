@@ -18,22 +18,33 @@ $conn = new mysqli($host, $username, $password, $database);
 $result = $conn->query("SET NAMES UTF8");
 
 //-----  Personal  Details  -----------------------------------------------------------------------------------
-if($_POST["Mode"] == "USER"){
+// if($_POST["Mode"] == "USER"){
 
-	$outp = "[{'Title':'ข้อมูลกำลังพล','Data':[]}]";
+//	$outp = "[{'Title':'ข้อมูลกำลังพล','Data':[]}]";
 
-	$result = $conn->query("SELECT * FROM personal WHERE Company='ร้อย.สสก.'");
+//	$result = $conn->query("SELECT * FROM personal WHERE Company='ร้อย.สสก.'");
+	$result = $conn->query("SELECT Institution , Count(PersonalID) as count_id FROM personal GROUP BY Institution");
 	$Num = $result->num_rows;
-	$outp.= "[{}]";
+	while($rs = $result->fetch_array(MYSQLI_ASSOC)){
+		echo $rs["Institution"]."---".$rs["count_id"]."<br>";
+	}
 
-	}else{
-		$outp = '{"result":false,"message":"ไม่พบข้อมูลบุคคล"}';
-	}		
-}
+
+	// $Num = $result->num_rows;
+	// $rs = $result->fetch_array(MYSQLI_ASSOC);
+	//  for($i=0;$i<$outp.length;$i++){
+	//  	$outp.= $outp[$i]."<br>";
+	//  }
+
+// }else{
+// 		$outp = '{"result":false,"message":"ไม่พบข้อมูลบุคคล"}';
+// }
 
 //-----------------------------------------------------------------------------------------------------------
 
 $conn->close();
 
 echo($outp);
+echo "--|--";
+echo($Num);
 ?>

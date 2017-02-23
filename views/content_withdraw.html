@@ -1,11 +1,11 @@
 <div ng-controller="withdrawCtrl" class="grad1">
-    <div  class="withdraw_container clr-both" ng-repeat="withdraw in withdrawList">
+    <div  class="withdraw_container clr-both" ng-class="{'bg_opa':$index%2==0}" ng-repeat="withdraw in withdrawList">
         <div class="half_window">
             <input type="text" ng-model="withdraw.iden" focus-on-show class="form-control identity_input" placeholder="กรอกหมายเลขประจำตัวประชาชน" 
             ng-enter="IndentitySubmit(withdraw)"  ng-show="withdraw.isIdentityInput" />
             <div class="detail_holder" ng-show="withdraw.isIdentityShow">
                 <div class="personal_card_img ft-lt">
-                    <img class="w-h-100per img-circle" fallback-src="personal_image/person.png" ng-src="{{withdraw.userImage}}">
+                    <img class="w-h-100per" fallback-src="personal_image/person.png" ng-src="{{withdraw.userImage}}">
                 </div>
                 <div class="width-350 personal_details_card ft-lt">
                     <span> <b> {{withdraw.TitleName}} {{withdraw.FirstName }} {{withdraw.LastName}} </b> ({{withdraw.Company}}) 
@@ -13,13 +13,13 @@
                 </div>
             </div>
         </div>
-        <div class="half_window">
+        <div class="half_window sm-mg-75">
             <input type="text" ng-model="withdraw.weapon" focus-on-show class="form-control identity_input" placeholder="กรอกหมายเลขประจำอาวุธ" 
             ng-enter="WeaponSubmit(withdraw)" ng-show="withdraw.isWeaponInput"/>
             
             <div class="detail_holder" ng-show="withdraw.isWeaponShow">
                 <div class="personal_card_img ft-lt">
-                    <img class="w-h-100per img-circle" fallback-src="personal_image/person.png" ng-src="{{withdraw.itemImage}}">
+                    <img class="w-h-100per" fallback-src="personal_image/person.png" ng-src="{{withdraw.itemImage}}">
                 </div>
                 <div class="width-350 personal_details_card ft-lt">
                     <span> <b> {{withdraw.WeaponType}}({{withdraw.WeaponNumber}}) </b> {{withdraw.WeaponCompany}} 

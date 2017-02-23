@@ -13,3 +13,38 @@
     font-weight: bold;
     margin-bottom: 5px;
 }
+
+.thead-default tr th,td {
+    text-align: center;
+}
+
+.mg-tp-5{
+    margin-top: 5px;
+}
+
+.table-subheader{
+    width: 100%;
+    text-align: center;
+}
+@media only screen and (max-width: 765px) {
+    .table_holder{
+        width: 100%;
+    } 
+
+    .wd-m tr th {
+        width: 12%;
+    }
+
+    .row-header{
+        width: 14%;
+        font-size: 12px;
+    }
+
+    .font-12-m tr th, .font-12-m{
+        font-size: 12px;
+    }
+
+    .font-11-m{
+        font-size: 11px;
+    }
+}

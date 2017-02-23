@@ -1,0 +1,59 @@
+.report-header-container{
+    margin-bottom: 15px;
+}
+
+.report-header-container div{
+    text-align: center;
+    font-size: 18px;
+}
+
+.report-header-container #top{
+    margin-top: 25px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.report-page{
+    padding: 10px;
+}
+
+.report-body form div input {
+    height: 25px;
+    display: inline-block;
+    width: 60px;;
+    margin-bottom: 10px;
+}
+
+.report-topic{
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.report-page .btn{
+    margin: auto;
+    display: block;
+}
+
+.reporter-footer{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: #bdbdbd;
+}
+    
+.wd-report {
+    display: inline-block;
+    width: 105px;
+}
+
+@media only screen and (max-width: 765px) {
+
+    .report-page .form-group{
+        margin-left: 10px;
+        margin-bottom: 5px;
+    }
+
+    .report-body div form{
+        margin-left: 15px;
+    }
+
+}

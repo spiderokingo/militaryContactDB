@@ -61,7 +61,7 @@
                ngf-accept="'image/*'"
                ng-model="picfile" accept="image/*"
                fallback-src="personal_image/person.png"
-               ng-show="isEditPersonalDetails && user.Permission == 'ADMIN'"
+               ng-show="isEditPersonalDetails && isAllowed()"
                ng-src="{{person.ImageFullPath}}">
     </div>
     <div class="details_modal">
@@ -199,11 +199,22 @@
         </div>
         <span class="glyphicon glyphicon-trash trash_c" aria-hidden="true" ng-click="deleteItem(phone)" ng-show="isEditPersonalDetails"></span>
       </div>
+
+      <div ng-show="isAllowed()">
+        <label class="number-label"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>  Permission </label>
+        <button class="btn dropdown-toggle btn-opt" type="button" ng-disabled="!isEditPersonalDetails" data-toggle="dropdown">
+          {{PermissionList[person.Permission]}}
+        </button>
+        <ul class="dropdown-menu details-opt-dd">
+            <li ng-repeat="permission in PermissionList" ng-click="onPermissionAction($index)"><a>{{PermissionList[$index]}}</a></li>
+        </ul>
+      </div>
+
     </div>
   </div>
 	<div class="modal-footer">
-        <button class="btn btn-secondary" type="button" ng-click="edit()" ng-show="!isEditPersonalDetails && user.Permission == 'ADMIN'">Edit</button>
-        <button class="btn btn-secondary" type="button" ng-click="save()" ng-show="isEditPersonalDetails && user.Permission == 'ADMIN'">Save</button>
+        <button class="btn btn-secondary" type="button" ng-click="edit()" ng-show="!isEditPersonalDetails && isAllowed()">Edit</button>
+        <button class="btn btn-secondary" type="button" ng-click="save()" ng-show="isEditPersonalDetails && isAllowed()">Save</button>
         <button class="btn btn-primary" type="button" ng-click="close()">Close</button>
   </div>
 </script>

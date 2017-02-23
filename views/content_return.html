@@ -1,5 +1,5 @@
 <div ng-controller="returnCtrl" class="grad2">
-    <div  class="withdraw_container clr-both" ng-repeat="withdraw in withdrawList">
+    <div  class="withdraw_container clr-both" ng-class="{'bg_opa':$index%2==0}" ng-repeat="withdraw in withdrawList">
         <div class="half_window">
             <input type="text" ng-model="withdraw.weapon" focus-on-show class="form-control identity_input" placeholder="กรอกหมายเลขประจำอาวุธ" 
             ng-enter="WeaponSubmit(withdraw)" ng-show="withdraw.isWeaponInput"/>
@@ -15,7 +15,7 @@
                 </div>
             </div>
         </div>
-        <div class="half_window">
+        <div class="half_window sm-mg-75">
             <input type="text" ng-model="withdraw.iden" focus-on-show class="form-control identity_input" placeholder="กรอกหมายเลขประจำตัวประชาชน" 
             ng-enter="IndentitySubmit(withdraw)"  ng-show="withdraw.isIdentityInput" />
             <div class="detail_holder" ng-show="withdraw.isIdentityShow">

@@ -210,7 +210,7 @@ span.menu img{
     background: none !important;
     -webkit-box-shadow: none;
     box-shadow: none;
-    border-bottom: 1px solid #ecece8 !important;
+    /*border-bottom: 1px solid #ecece8 !important;*/
     border-radius: 0px;
     display: inline-block;
 }
@@ -313,7 +313,7 @@ span.menu img{
   -webkit-box-shadow: none;
   box-shadow: none;
   border: none;
-  border-bottom: 1px solid #ecece8 ;
+  /*border-bottom: 1px solid #ecece8 ;*/
 }
 
 .text_display[disabled] {
@@ -395,4 +395,8 @@ span.menu img{
 
 .txt-red{
   color: #ff5454;
+}
+
+.hand{
+  cursor: pointer;
 }

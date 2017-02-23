@@ -9,6 +9,16 @@
   padding-left: 5px;
 }
 
+.details-opt-dd{
+  top: 360px;
+  left: 110px;
+}
+
+.btn-opt:disabled {
+    color: black;
+    background: white;
+}
+
 /* Device of width 678*/
 @media only screen and (max-width: 678px) {
   .personal_card_img  {
@@ -21,5 +31,10 @@
   .personal_details_card{
     width: 85%;
   }
+
+  .details-opt-dd{
+    top: 330px;
+  }
+
 
 }

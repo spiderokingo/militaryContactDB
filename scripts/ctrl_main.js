@@ -1,6 +1,6 @@
 // JavaScript Document
 
-app.controller('tabController', function($scope, $http, $uibModal, $log, $state, localStorageService, $rootScope) {
+app.controller('tabController', function($scope, $http, $uibModal, $log, $state, localStorageService, $rootScope, myConfig) {
 	$scope.tabclicked = function(index){
 			$rootScope.tabactive = index;
 		}
@@ -14,28 +14,43 @@ app.controller('tabController', function($scope, $http, $uibModal, $log, $state,
 				{id:1, title:'อาวุธ', url: 'views/content_weapon_details.html'},
 				{id:2, title:'สป 2-4'},
 				{id:3, title:'ปริ้น Bar Code', url: 'views/content_code_printing.html'},
-			]
+			],
+			
 		},
-		{id:2, title:'ข้อมูลเบอร์ติดต่อ', url: 'views/content_personal_contact.html' },
-		{id:3, title:'เบิก/คืน สป.',
+		{id:2, title:'ข้อมูลเบอร์ติดต่อ', url: 'views/content_personal_contact.html'},
+		{id:3, title:'เบิก/คืน สป.' ,
 			subList:[
 					{id:0, title:'เบิกอาวุธ', url: 'views/content_withdraw.html'},
 					{id:1, title:'คืนอาวุธ', url: 'views/content_return.html'},
 				] 
 		},
 		{id:4, title:'หน่วยฝึกทหารใหม่'},
-		{id:5, title:'Logout'},
+		{id:5, title:'รายงาน', url: 'views/content_report.html'},
+		{id:6, title:'ตั้งค่า', url: 'views/content_setting.html'},
+		{id:100, title:'Logout'},
 	];
 
 	$scope.init = function () {
-
-		if($rootScope.user.Permission == 'USER')
-			$scope.sourceUrl = $scope.database_tabs[2].url;
-		else{
-			// $scope.sourceUrl = $scope.database_tabs[2].url;
-			$scope.sourceUrl = $scope.database_tabs[1].subList[0].url;
+		switch(myConfig.Permission[$rootScope.user.Permission]){
+			case 'Administrator':
+			case 'ผู้บังคับบัญชา':
+			case 'ผู้ดูแลระบบ':
+				$scope.sourceUrl = $scope.database_tabs[0].url;
+				// $scope.sourceUrl = $scope.database_tabs[2].url;
+			break;
+			default:
+				$scope.sourceUrl = $scope.database_tabs[2].url;
+			break;
 		}
 
+	}
+
+	$scope.MenuShowHide = function(id){
+		if(id == 100){
+			//Logout Menu
+			return true;
+		}
+		return myConfig.MenuPermission[$rootScope.user.Permission].indexOf(id) > -1;
 	}
 
 	$scope.mb_menu_clicked = function(index){

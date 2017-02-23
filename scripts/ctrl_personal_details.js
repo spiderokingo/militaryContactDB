@@ -1,5 +1,5 @@
 
-app.controller('personalController', function($scope, $http, $uibModal, $log, $rootScope, $state, localStorageService, $timeout) {
+app.controller('personalController', function($scope, $http, $uibModal, $log, $rootScope, $state, localStorageService, $timeout, myConfig) {
 
 	$scope.init = function(){
 
@@ -9,8 +9,8 @@ app.controller('personalController', function($scope, $http, $uibModal, $log, $r
 		$scope.amount = 25;
 		$scope.search = "";
 		$scope.maxSize = 7;
-
-		if($rootScope.user.Permission == 'ADMIN' && $rootScope.tabactive == 1){
+		
+		if(myConfig.Permission[$rootScope.user.Permission] == "Administrator" && $rootScope.tabactive == 1){
 			$scope.getPersonalList();
 		}else{
 			$scope.getContactList();
@@ -38,6 +38,7 @@ app.controller('personalController', function($scope, $http, $uibModal, $log, $r
 		});
 
 		request.success(function (res) {
+			console.log(res)
 			$scope.PersonalRecord = res.PersonalRecord;
 			$scope.TotalItems = res.TotalItems;
 
@@ -73,14 +74,16 @@ app.controller('personalController', function($scope, $http, $uibModal, $log, $r
 		})
 		request.success(function (res) {
             var modalInstance = $uibModal.open({
-			animation: true,
-			templateUrl: 'PersonalDetailModalTemplate.html',
-			controller: 'PersonalDetailModalCtrl',
-			resolve: {
-				PersonalDetails: function() {
-					return res;
+				backdrop: 'static',
+				keyboard: false,
+				animation: true,
+				templateUrl: 'PersonalDetailModalTemplate.html',
+				controller: 'PersonalDetailModalCtrl',
+				resolve: {
+					PersonalDetails: function() {
+						return res;
+					}
 				}
-			}
 			});
 			modalInstance.result.then(function (modal_person) {
 				// Check whether the Person Details got edit or not
@@ -111,7 +114,8 @@ app.controller('personalController', function($scope, $http, $uibModal, $log, $r
 // 
 // START Personal Details Modal Controller
 // 
-app.controller('PersonalDetailModalCtrl', function ($scope, $uibModalInstance, PersonalDetails, $sce, Upload, $http, toaster) {
+app.controller('PersonalDetailModalCtrl', function ($scope, $uibModalInstance, PersonalDetails,
+ $sce, Upload, $http, toaster, myConfig, $rootScope) {
 
 	var isEditSaved = false;
 	$scope.init = function () {
@@ -121,7 +125,6 @@ app.controller('PersonalDetailModalCtrl', function ($scope, $uibModalInstance, P
 		$scope.person = angular.copy(PersonalDetails);
 		$scope.getTitleNameList();
 
-		console.log($scope.person);
 
 		// $scope.Address = [
 		// 	{
@@ -135,6 +138,9 @@ app.controller('PersonalDetailModalCtrl', function ($scope, $uibModalInstance, P
 		// 		PostCode: "65000"
 		// 	}
 		// ];
+
+		$scope.PermissionList = myConfig.Permission;
+		console.log(PersonalDetails);
 
 		$scope.CompanyList = [
 			{ CompanyName: 'บก.พัน' },
@@ -239,6 +245,15 @@ app.controller('PersonalDetailModalCtrl', function ($scope, $uibModalInstance, P
 			PostCode: "",
 			Mode: "INS"
 		});
+	}
+
+	$scope.isAllowed = function(){
+		return $scope.PermissionList[$rootScope.user.Permission] == 'Administrator'
+	}
+
+	$scope.onPermissionAction = function(val){
+		console.log(" > " + val)
+		$scope.person.Permission = val;
 	}
 
 	$scope.deleteItem = function (item) {

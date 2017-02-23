@@ -39,6 +39,7 @@ $rs = $result->fetch_array(MYSQLI_ASSOC);
     $outp .= ',"FirstName":"'.$rs["FirstName"].'"';
 	$outp .= ',"LastName":"'.$rs["LastName"].'"';
 	$outp .= ',"Permission":"'.$rs["Permission"].'"';
+	$outp .= ',"Company":"'.$rs["Company"].'"';
 	$outp .= '}';
 
 	$conn->query("UPDATE personal SET DateLogin='".$time."' WHERE PersonalID='".$rs["PersonalID"]."'");

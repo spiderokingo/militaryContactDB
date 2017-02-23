@@ -1,0 +1,24 @@
+<div class="report-page" ng-controller="reportCtrl">
+  <div class="report-header-container">
+    <div id="top">รายงานยอดกำลังพล พลทหาร</div>
+    <div>{{Company}}</div>
+    <div>ประจำวันที่ {{currentDate}}</div>
+  </div>
+  <div class="report-body">
+    <div  class="report-topic">ยอดเดิม: {{GrandTotal}}</div> 
+    <div  class="report-topic">จำหน่าย: </div> 
+    <form class="form-inline" ng-repeat="item in reportList">
+      <div class="form-group">
+        <div class="wd-report">{{item.Title}}</div> :
+        <input type="number" number-converter class="form-control" ng-model="item.Value" ng-change="calculateTotal()">
+      </div>
+    </form>
+  </div>
+  
+  <div class="report-topic">รวมจำหน่าย: {{AbsentTotal}}</div>
+  <div class="report-topic">คงเหลือ: {{GrandTotalLeft}}</div>
+
+  <button class="btn btn-primary" type="button" ng-click="save()">บันทึกรายงาน</button>
+
+  <div class="reporter-footer">*ผู้รายงาน: {{reporter}}</div>
+</div>

@@ -1,11 +1,11 @@
 .withdraw_container {
-    margin: 20px 0px;
 }
 
 .identity_input {
     margin-left: 20px;
     width: 250px;
     display: inline-block;
+    margin-top: 6px;
 }
 
 .detail_holder{
@@ -14,9 +14,9 @@
 }
 
 .half_window{
-    width: 48%;
     float: left;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .clr-both {
@@ -46,6 +46,7 @@
     position: absolute;
     left: 0;
     background: rgba(181,227,234,0.25); /* For browsers that do not support gradients */
+    padding-top: 20px;
 }
 
 .grad2 {
@@ -54,4 +55,19 @@
     position: absolute;
     left: 0;
     background: rgba(245,205,205,0.25); /* For browsers that do not support gradients */
+    padding-top: 20px;
+}
+
+.bg_opa{
+    background: rgba(0, 0, 0, 0.1);
+    height: 70px;
+}
+
+@media only screen and (max-width: 678px) {
+    .bg_opa{
+        background: rgba(0, 0, 0, 0.1);
+        height: 140px;
+    }
+
+    .sm-mg-75 { margin-left: 75px; }
 }

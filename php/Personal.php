@@ -73,6 +73,7 @@ $rs = $result->fetch_array(MYSQLI_ASSOC);
 	$outp .= ',"NickName":"'. $rs["NickName"].'"';
 	$outp .= ',"BirthDay":"'. $rs["BirthDay"].'"';
 	$outp .= ',"BloodGroup":"'. $rs["BloodGroup"].'"';
+	$outp .= ',"Permission":"'. $rs["Permission"].'"';
 
 	//------------ Mititary Data -----------------------------------------
 		$resultMilitary = $conn->query("SELECT * FROM personal_military WHERE PersonalID='".$rs["PersonalID"]."'");
@@ -132,6 +133,7 @@ if($_POST["Mode"] == "UPDATE"){
 	$sql .= ", NickName='".$obj["NickName"]."'";
 	$sql .= ", BirthDay='".$obj["BirthDay"]."'";
 	$sql .= ", BloodGroup='".$obj["BloodGroup"]."'";
+	$sql .= ", Permission='".$obj["Permission"]."'";
 	$sql .= " WHERE PersonalID='".$obj["ID"]."'";
 
 	$sql2 = "UPDATE personal_military SET ";
