@@ -5,16 +5,6 @@ app.controller('loginController', function($scope, $location, localStorageServic
     $scope.user = {};
     $scope.isLoginFailed = false;
 
-    $scope.init = function () {
-        // Check Login state and user permission
-        if($rootScope.user != null){
-            if($rootScope.user.Permission == 'USER')
-                $state.go('personalcontact');
-            else if($rootScope.user.Permission == 'ADMIN')
-                $state.go('main');
-        }
-    }
-
     $scope.login = function(){
 
         // var request = $http({
@@ -66,6 +56,4 @@ app.controller('loginController', function($scope, $location, localStorageServic
     $scope.setLocalStorage = function (data) {
         localStorageService.set('userObj',angular.toJson(data));
     }
-
-    $scope.init();
 });

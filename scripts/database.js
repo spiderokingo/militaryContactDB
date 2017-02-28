@@ -19,13 +19,6 @@ app.controller('tabController', function($scope, $http, $uibModal, $log, $state,
     {id:6, title:'Logout'}
   ];
 
-  $scope.init = function () {
-	  	if($rootScope.user.Permission == 'USER')
-	  		$rootScope.tabactive = 4;
-		else
-		  	$rootScope.tabactive = 1;
-  }
-
 	$scope.mb_menu_clicked = function(index,state){
 
 		if(index != undefined){
@@ -44,7 +37,5 @@ app.controller('tabController', function($scope, $http, $uibModal, $log, $state,
 			$scope.mb_menu_active = !$scope.mb_menu_active;
 
 	}
-
-	$scope.init();
 
 });

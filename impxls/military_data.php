@@ -13,7 +13,7 @@
 if($_GET["St"]!="" and $_GET["Sp"]!=""){
 	//*** Get Document Path ***//
 	$strPath = realpath(basename(getenv($_SERVER["SCRIPT_NAME"]))); // C:/AppServ/www/myphp
-	$OpenFile = "private259.xlsx";
+	$OpenFile = "private259-army-data.xlsx";
 	//*** Create Exce.Application ***//
 	$xlApp = new COM("Excel.Application");
 	$xlBook = $xlApp->Workbooks->Open($strPath."/".$OpenFile);
@@ -35,23 +35,15 @@ $result = $conn->query("SET NAMES UTF8");
 		If(trim($xlSheet1->Cells->Item($i,1)) != "")
 		{
 			$strSQL = "";
-			$strSQL .= "INSERT INTO personal ";
-			$strSQL .= "(Category,IdentityID,Password,Permission,TitleName,FirstName,LastName,MilitaryID,Father,Mother,Education,TimeArmy,Company,Generation,DateTime) ";
+			$strSQL .= "INSERT INTO personal_military ";
+			$strSQL .= "(PersonalID,MilitaryID,Company,TimeArmy,Generation,Unit,DateTime) ";
 			$strSQL .= "VALUES ";
-			$strSQL .= "('".iconv('TIS-620', 'UTF-8',$xlSheet1->Cells->Item($i,2))."' ";
-			$strSQL .= ",'".$xlSheet1->Cells->Item($i,3)."' ";
-			$strSQL .= ",'".$xlSheet1->Cells->Item($i,4)."' ";
-			$strSQL .= ",'".$xlSheet1->Cells->Item($i,5)."' ";
-			$strSQL .= ",'".iconv('TIS-620', 'UTF-8',$xlSheet1->Cells->Item($i,6))."' ";
-			$strSQL .= ",'".iconv('TIS-620', 'UTF-8',$xlSheet1->Cells->Item($i,7))."' ";
-			$strSQL .= ",'".iconv('TIS-620', 'UTF-8',$xlSheet1->Cells->Item($i,8))."' ";
-			$strSQL .= ",'".$xlSheet1->Cells->Item($i,9)."' ";
-			$strSQL .= ",'".iconv('TIS-620', 'UTF-8',$xlSheet1->Cells->Item($i,10))."' ";
-			$strSQL .= ",'".iconv('TIS-620', 'UTF-8',$xlSheet1->Cells->Item($i,11))."' ";
-			$strSQL .= ",'".iconv('TIS-620', 'UTF-8',$xlSheet1->Cells->Item($i,12))."' ";
-			$strSQL .= ",'".iconv('TIS-620', 'UTF-8',$xlSheet1->Cells->Item($i,13))."' ";
-			$strSQL .= ",'".iconv('TIS-620', 'UTF-8',$xlSheet1->Cells->Item($i,14))."' ";
-			$strSQL .= ",'".iconv('TIS-620', 'UTF-8',$xlSheet1->Cells->Item($i,15))."' ";
+			$strSQL .= "('".$xlSheet1->Cells->Item($i,1)."' ";
+			$strSQL .= ",'".iconv('TIS-620', 'UTF-8',$xlSheet1->Cells->Item($i,2))."' ";
+			$strSQL .= ",'".iconv('TIS-620', 'UTF-8',$xlSheet1->Cells->Item($i,3))."' ";
+			$strSQL .= ",'".iconv('TIS-620', 'UTF-8',$xlSheet1->Cells->Item($i,4))."' ";
+			$strSQL .= ",'".iconv('TIS-620', 'UTF-8',$xlSheet1->Cells->Item($i,5))."' ";
+			$strSQL .= ",'ร.4 พัน.3' ";
 			$strSQL .= ",'".date("Y-m-d H:i:s")."'";
 			$strSQL .= ")";
 			$Status = ($conn->query($strSQL) === TRUE? "Success":"False");

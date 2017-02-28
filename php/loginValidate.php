@@ -29,17 +29,20 @@ $result = $conn->query("SELECT * FROM personal WHERE IdentityID='".$_POST["Usern
 
 if ($result->num_rows == 1) {
 $rs = $result->fetch_array(MYSQLI_ASSOC);
+    $result2 = $conn->query("SELECT * FROM personal_military WHERE PersonalID='".$rs["PersonalID"]."'");
+    $rs2 = $result2->fetch_array(MYSQLI_ASSOC);
+
     $outp = '{"result":true';
     $outp .= ',"message":"Login Successfull"';
 	$outp .= ',"ImageFullPath":"'.$ImagePath.$rs["ImageName"].'"';
     $outp .= ',"PersonalID":"'.$rs["PersonalID"].'"';
     $outp .= ',"Username":"'.$rs["IdentityID"].'"';
-    $outp .= ',"MilitaryID":"'.$rs["MilitaryID"].'"';
+    $outp .= ',"MilitaryID":"'.$rs2["MilitaryID"].'"';
     $outp .= ',"TitleName":"'.$rs["TitleName"].'"';
     $outp .= ',"FirstName":"'.$rs["FirstName"].'"';
 	$outp .= ',"LastName":"'.$rs["LastName"].'"';
 	$outp .= ',"Permission":"'.$rs["Permission"].'"';
-	$outp .= ',"Company":"'.$rs["Company"].'"';
+	$outp .= ',"Company":"'.$rs2["Company"].'"';
 	$outp .= '}';
 
 	$conn->query("UPDATE personal SET DateLogin='".$time."' WHERE PersonalID='".$rs["PersonalID"]."'");

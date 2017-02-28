@@ -8,8 +8,8 @@ app.controller('reportCtrl', function($scope, $http, $rootScope, toaster, myConf
 
     $scope.reporter = $rootScope.user.FirstName + " " + $rootScope.user.LastName;
     $scope.Company = $rootScope.user.Company;
-    $scope.GrandTotal = 250;
-    $scope.GrandTotalLeft = $scope.GrandTotal;
+    $scope.PrivateTotal = 250;
+    $scope.PrivateTotalLeft = $scope.PrivateTotal;
     $scope.AbsentTotal = 0;
 
     $scope.dateSetup();
@@ -28,16 +28,16 @@ app.controller('reportCtrl', function($scope, $http, $rootScope, toaster, myConf
       $scope.obj = res.PersonalReport;
       $scope.reportList = res.PersonalReport.DistributionList;
       
-      $scope.GrandTotal = parseInt($scope.obj.GrandTotal);
+      $scope.PrivateTotal = parseInt($scope.obj.PrivateTotal);
       $scope.calculateTotal();
 		});
   }
 
   $scope.dateSetup = function(){
     var dateObj = new Date();
-    var month = dateObj.getUTCMonth() + 1; //months from 1-12
-    var day = dateObj.getUTCDate();
-    var year = dateObj.getUTCFullYear()+543; //convert to พ.ศ.
+    var month = dateObj.getMonth() + 1; //months from 1-12
+    var day = dateObj.getDate();
+    var year = dateObj.getFullYear()+543; //convert to พ.ศ.
     
     $scope.currentDate = day + " " + myConfig.ThaiMonth[month] + " " + year;
   }
@@ -50,11 +50,11 @@ app.controller('reportCtrl', function($scope, $http, $rootScope, toaster, myConf
 
       }
     });
-    $scope.GrandTotalLeft = $scope.obj.GrandTotal - $scope.AbsentTotal;
+    $scope.PrivateTotalLeft = $scope.obj.PrivateTotal - $scope.AbsentTotal;
   }
 
   $scope.save = function(){
-    if($scope.GrandTotalLeft < 0) {
+    if($scope.PrivateTotalLeft < 0) {
       toaster.pop("error","กรุณาตรวจสอบตัวเลขใหม่อีกครั้ง");
       return;
     }
@@ -65,7 +65,9 @@ app.controller('reportCtrl', function($scope, $http, $rootScope, toaster, myConf
 			data: { 
         'Mode': mode, 
         'ID': $scope.obj.ID,
-        'GrandTotal': $scope.obj.GrandTotal,
+        'COTotal': $scope.obj.COTotal,
+        'NCOTotal': $scope.obj.NCOTotal,
+        'PrivateTotal': $scope.obj.PrivateTotal,
         'DistributionList': $scope.obj.DistributionList,
         'UserReport':$rootScope.user.PersonalID,
         'Company': $scope.Company
@@ -73,8 +75,11 @@ app.controller('reportCtrl', function($scope, $http, $rootScope, toaster, myConf
 			headers: { 'Content-Type': 'application/json' }
 		}).then(function (res) {
       console.log(res);
-      if(res.statusText == "OK")
+      if(res.statusText == "OK"){
 			  toaster.pop("success","บันทึกสำเร็จ");
+        $scope.res.Status = "success";
+        $scope.obj.ID = res.ID;
+      }
       else
         toaster.pop("error","ไม่สามารถบันทึกได้");
 		});

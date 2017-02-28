@@ -5,7 +5,7 @@
     <div>ประจำวันที่ {{currentDate}}</div>
   </div>
   <div class="report-body">
-    <div  class="report-topic">ยอดเดิม: {{GrandTotal}}</div> 
+    <div  class="report-topic">ยอดเดิม: {{PrivateTotal}}</div> 
     <div  class="report-topic">จำหน่าย: </div> 
     <form class="form-inline" ng-repeat="item in reportList">
       <div class="form-group">
@@ -16,7 +16,7 @@
   </div>
   
   <div class="report-topic">รวมจำหน่าย: {{AbsentTotal}}</div>
-  <div class="report-topic">คงเหลือ: {{GrandTotalLeft}}</div>
+  <div class="report-topic">คงเหลือ: {{PrivateTotalLeft}}</div>
 
   <button class="btn btn-primary" type="button" ng-click="save()">บันทึกรายงาน</button>
 
