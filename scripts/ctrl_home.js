@@ -7,6 +7,7 @@ app.controller('homeCtrl', function($scope, focus, $rootScope, $http, toaster, m
     $scope.CompanyNumberInitial();
     $scope.PrivateDetailsInitial();
     $scope.getReportList();
+    
 
     $scope.StatusList = [];
 
@@ -35,6 +36,9 @@ app.controller('homeCtrl', function($scope, focus, $rootScope, $http, toaster, m
 
       $scope.setupPersonList();
       $scope.calculateTotal();
+
+      $scope.setupPrivateDetails();
+      
 		});
   }
 
@@ -65,50 +69,18 @@ app.controller('homeCtrl', function($scope, focus, $rootScope, $http, toaster, m
 
   $scope.setupPersonList = function(){
     angular.forEach($scope.res.PersonalList, function(resVal){
-      switch (resVal.Company) {
-        case "ร้อย.สสก.":
-          $scope.companyNumberList[2].CompanyAssist = parseInt(resVal.Private.PrivateTotal);
-          break;
-        case "ร้อย.สสช.":
-          $scope.companyNumberList[2].CompanySupport = parseInt(resVal.Private.PrivateTotal);
-          break;
-        case "ร้อย.อวบ.ที่ 1":
-          $scope.companyNumberList[2].Company1 = parseInt(resVal.Private.PrivateTotal);
-          break;
-        case "ร้อย.อวบ.ที่ 2":
-          $scope.companyNumberList[2].Company2 = parseInt(resVal.Private.PrivateTotal);
-          break;
-        case "ร้อย.อวบ.ที่ 3":
-          $scope.companyNumberList[2].Company3 = parseInt(resVal.Private.PrivateTotal);
-          break;
-        default:
-          break;
-      }
+      //แยกแยะกองร้อยต่างๆ
+      var tempCompany = $scope.getCompanyVar(resVal.Company);
+      //กรอกจำนวนกำลังพลตามกองร้อยและยศ
+      $scope.companyNumberList[0][tempCompany] = parseInt(resVal.CO.COTotal);
+      $scope.companyNumberList[1][tempCompany] = parseInt(resVal.NCO.NCOTotal);
+      $scope.companyNumberList[2][tempCompany] = parseInt(resVal.Private.PrivateTotal);
     });
   }
 
   $scope.setupPrivateDetails = function(){
     angular.forEach($scope.res.PersonalList, function(perVal){
-      var tempCompany = "";
-        switch (perVal.Company) {
-          case "ร้อย.สสก.":
-            tempCompany = "CompanyAssist";
-            break;
-          case "ร้อย.สสช.":
-            tempCompany = "CompanySupport";
-            break;
-          case "ร้อย.อวบ.ที่ 1":
-            tempCompany = "Company1";
-            break;
-          case "ร้อย.อวบ.ที่ 2":
-            tempCompany = "Company2";
-            break;
-          case "ร้อย.อวบ.ที่ 3":
-            tempCompany = "Company3";
-            break;
-          default:
-            break;
-      }
+      var tempCompany = $scope.getCompanyVar(perVal.Company);
 
       //ใส่ค่าที่ยอดเดิมของแต่ละกองร้อย
       $scope.PrivateList[0][tempCompany] = parseInt(perVal.Private.PrivateTotal);
@@ -121,6 +93,28 @@ app.controller('homeCtrl', function($scope, focus, $rootScope, $http, toaster, m
 
     $scope.calculateTotalContribution();
     $scope.calculateDetailsTotalLeft();
+  }
+
+  $scope.getCompanyVar = function(companyInThai){
+    var tempCompany = "";
+      switch (companyInThai) {
+        case "ร้อย.สสก.":
+          tempCompany = "CompanyAssist";
+          break;
+        case "ร้อย.สสช.":
+          tempCompany = "CompanySupport";
+          break;
+        case "ร้อย.อวบ.ที่ 1":
+          tempCompany = "Company1";
+          break;
+        case "ร้อย.อวบ.ที่ 2":
+          tempCompany = "Company2";
+          break;
+        case "ร้อย.อวบ.ที่ 3":
+          tempCompany = "Company3";
+          break;
+    }
+    return tempCompany;
   }
 
   $scope.calculateDetailsTotalLeft = function(){
@@ -170,7 +164,6 @@ app.controller('homeCtrl', function($scope, focus, $rootScope, $http, toaster, m
 
     switch(type){
       case 2:
-        $scope.setupPrivateDetails();
         $scope.DetailsHeaderName = "พลทหาร" ;
         $scope.StatusList = $scope.PrivateList;
       break;
@@ -204,46 +197,20 @@ app.controller('homeCtrl', function($scope, focus, $rootScope, $http, toaster, m
   }
 
   $scope.CompanyNumberInitial = function(){
-    // $scope.companyNumberList = [];
-    // var TitleName = ["น.", "ส.", "พล"];
-    // angular.forEach(TitleName, function(val, ind){
-    //   $scope.companyNumberList.push(
-    //     {
-    //       TitleName: TitleName[ind],
-    //       CompanyAssist: 0,
-    //       CompanySupport: 0,
-    //       Company1: 0,
-    //       Company2: 0,
-    //       Company3: 0
-    //     }
-    //   );
-    // });
-    $scope.companyNumberList = [
-      {
-        TitleName: "น",
-        CompanyAssist: 11,
-        CompanySupport: 0,
-        Company1: 4,
-        Company2: 4,
-        Company3: 2
-      },
-      {
-        TitleName: "ส.",
-        CompanyAssist: 79,
-        CompanySupport: 29,
-        Company1: 36,
-        Company2: 32,
-        Company3: 32
-      },
-      {
-        TitleName: "พล",
-        CompanyAssist: 0,
-        CompanySupport: 0,
-        Company1: 0,
-        Company2: 0,
-        Company3: 0
-      }
-    ];
+    $scope.companyNumberList = [];
+    var TitleName = ["น.", "ส.", "พล"];
+    angular.forEach(TitleName, function(val, ind){
+      $scope.companyNumberList.push(
+        {
+          TitleName: TitleName[ind],
+          CompanyAssist: 0,
+          CompanySupport: 0,
+          Company1: 0,
+          Company2: 0,
+          Company3: 0
+        }
+      );
+    });
   }
 	$scope.init();
 
