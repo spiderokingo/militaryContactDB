@@ -9,7 +9,6 @@
             <div class="Mission MissionName">ภารกิจ</div>
             <div class="Mission MissionTime">ห้วงเวลา</div>
             <div class="Mission MissionPersonal">กำลังพล</div>
-            <div class="Mission MissionEquipment">ยุทโธปกรณ์</div>
             <div class="Mission MissionLocation">พื้นที่ปฏิบัติการ</div>
             <div class="Mission MissionButton"></div>
             <div class="EndFloat"></div>
@@ -17,8 +16,7 @@
         <div class="troop-list" ng-repeat="mis in troopList">
             <div class="Mission MissionName">{{mis.MissionName}}</div>
             <div class="Mission MissionTime">{{mis.MissionTime}}</div>
-            <div class="Mission MissionPersonal" ng-click="missionPersonal(mis.MissionID);">{{mis.MissionPersonal}}</div>
-            <div class="Mission MissionEquipment">{{mis.MissionEquipment}}</div>
+            <div class="Mission MissionPersonal" ng-click="missionPersonal(mis.MissionID);">{{mis.MissionPerCO + mis.MissionPerNCO + mis.MissionPerPrivate}} นาย (น.{{}}, ส.{{}}, พลฯ {{}})</div>
             <div class="Mission MissionLocation">{{mis.MissionLocation}}</div>
             <div class="Mission MissionButton">แก้ไข</div>
             <div class="EndFloat"></div>
@@ -27,7 +25,6 @@
             <div class="Mission MissionName"><input type="text" ng-model="txt.MissionName" /></div>
             <div class="Mission MissionTime"><input type="text" ng-model="txt.MissionTimeSt" />-<input type="text" ng-model="txt.MissionTimeSp" /></div>
             <div class="Mission MissionPersonal"><input type="text" ng-model="txt.MissionPersonal" /></div>
-            <div class="Mission MissionEquipment"><input type="text" ng-model="txt.MissionEquipment" /></div>
             <div class="Mission MissionLocation"><input type="text" ng-model="txt.MissionLocation" /></div>
             <div class="Mission MissionButton" ng-click="missionInsert(txt);">บันทึก</div>
             <div class="EndFloat">{{txtMissionName}}</div>

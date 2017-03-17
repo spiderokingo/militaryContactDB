@@ -70,6 +70,14 @@
 
       <form class="form-inline">
         <div class="form-group">
+          เลขประจำตัวประชาชน <span id="">:</span>
+          <input type="text" class="form-control text_display_mb" ng-class="{'text_display':!isEditPersonalDetails}"
+           ng-model="person.IdentityID" ng-disabled="!isEditPersonalDetails">
+        </div>
+      </form>
+
+      <form class="form-inline">
+        <div class="form-group">
           ชื่อเล่น <span id="mg-90">:</span>
           <input type="text" class="form-control text_display_mb" ng-class="{'text_display':!isEditPersonalDetails}"
            ng-model="person.NickName" ng-disabled="!isEditPersonalDetails">
@@ -93,14 +101,6 @@
         </div>
       </form>
 
-      <form class="form-inline">
-        <div class="form-group">
-          เลขประจำตัวประชาชน <span id="">:</span>
-          <input type="text" class="form-control text_display_mb" ng-class="{'text_display':!isEditPersonalDetails}"
-           ng-model="person.IdentityID" ng-disabled="!isEditPersonalDetails">
-        </div>
-      </form>
-
       
       <label class="number-label"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span> ข้อมูลทหาร</label>
 
@@ -109,6 +109,22 @@
           เลขประจำตัวทหาร <span id="">:</span>
           <input type="text" class="form-control text_display_mb" ng-class="{'text_display':!isEditPersonalDetails}"
            ng-model="person.MilitaryID" ng-disabled="!isEditPersonalDetails">
+        </div>
+      </form>
+
+      <form class="form-inline">
+        <div class="form-group">
+          กำเนิด <span id="mg-68">:</span>
+          <input type="text" class="form-control text_display_mb" ng-class="{'text_display':!isEditPersonalDetails}"
+           ng-model="person.Institution" ng-disabled="!isEditPersonalDetails">
+        </div>
+      </form>
+
+      <form class="form-inline">
+        <div class="form-group">
+          รุ่น <span id="mg-90">:</span>
+          <input type="text" class="form-control text_display_mb" ng-class="{'text_display':!isEditPersonalDetails}"
+           ng-model="person.Genaration" ng-disabled="!isEditPersonalDetails">
         </div>
       </form>
 

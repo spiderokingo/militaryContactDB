@@ -2,13 +2,6 @@
 session_start();
 ob_start();
 
-//if($_COOKIE["UsernameInfantry43"] == ""){
-//	exit();
-//}
-
-// header("Access-Control-Allow-Origin: *");
-// header("Content-Type: application/json; charset=UTF-8");
-
 if(isset($_POST["Mode"]) == false){
     $_POST = json_decode(file_get_contents('php://input'), true);
 }
@@ -49,7 +42,6 @@ if($_POST["Mode"] == "LIST"){
 		$outp .= ',"TitleName":"'. $rs["TitleName"].'"';
 		$outp .= ',"FirstName":"'. $rs["FirstName"].'"';
 		$outp .= ',"LastName":"'. $rs["LastName"].'"';
-		$outp .= ',"Company":"'. $rs["Company"].'"';
 		$outp .= '}';
 	}
 
@@ -83,6 +75,8 @@ $rs = $result->fetch_array(MYSQLI_ASSOC);
 		$outp .= ',"TbArmyID":"'. $rsMilitary["ID"].'"';
 		$outp .= ',"MilitaryID":"'. $rsMilitary["MilitaryID"].'"';
 		$outp .= ',"Position":"'. $rsMilitary["Position"].'"';
+		$outp .= ',"Institution":"'. $rsMilitary["Institution"].'"';
+		$outp .= ',"Generation":"'. $rsMilitary["Generation"].'"';
 		$outp .= ',"Company":"'. $rsMilitary["Company"].'"';
 		
 	//------------ Phone Number List -----------------------------------------

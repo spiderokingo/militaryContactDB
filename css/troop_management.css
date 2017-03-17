@@ -34,7 +34,7 @@
     position: relative;
     margin: 5px 0px 0px 0px;
     padding: 5px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     text-align: center;
     float: left;
@@ -43,10 +43,10 @@
     width: 20%;
 }
 .troopManagementCtrl .troop-header .MissionTime {
-    width: 15%;
+    width: 20%;
 }
 .troopManagementCtrl .troop-header .MissionPersonal {
-    width: 15%;
+    width: 30%;
 }
 .troopManagementCtrl .troop-header .MissionEquipment {
     width: 20%;
@@ -61,15 +61,18 @@
     position: relative;
     width: 100%;
     margin: 5px;
+    font-size: 16px;
     border: 1px solid #CCC;
     border-radius: 5px;
     background-color: #FAFAFA;
+}
+.troopManagementCtrl .troop-list:hover {
+    background-color: #EAEAFF;
 }
 .troopManagementCtrl .troop-list .Mission {
     position: relative;
     margin: 5px 0px 5px 0px;
     padding: 5px;
-    font-size: 18px;
     float: left;
 }
 .troopManagementCtrl .troop-list .MissionName {
@@ -82,11 +85,10 @@
 .troopManagementCtrl .troop-list .MissionTime {
     width: 20%;
     text-align: center;
-    cursor: pointer;
     border-right: 1px solid #DDD;
 }
 .troopManagementCtrl .troop-list .MissionPersonal {
-    width: 10%;
+    width: 30%;
     text-align: center;
     cursor: pointer;
     border-right: 1px solid #DDD;
