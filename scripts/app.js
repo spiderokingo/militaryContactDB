@@ -27,6 +27,13 @@ $stateProvider
         data : { pageTitle: 'ฐานข้อมูล กองพันทหารที่ 3 กรมทหารราบที่ 4' }
     })
 
+    .state('personalcontact', {
+        url: '/personal_contact',
+        templateUrl : 'views/content_personal_contact.html',
+        controller  : 'personalController',
+        data : { pageTitle: 'Personal Contact' }
+    })
+
     .state('printconfirm', {
         url: '/print_qr',
         templateUrl : 'views/content_print_confirm.html',
@@ -43,8 +50,7 @@ $stateProvider
     
 }]);
 
-app.run(['$rootScope', '$state', '$location', 'localStorageService', '$http',
-function($rootScope, $state, $location, localStorageService, $http){
+app.run(['$rootScope', '$state', '$location', 'localStorageService',  function($rootScope, $state, $location, localStorageService){
 
     $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
 
@@ -53,24 +59,14 @@ function($rootScope, $state, $location, localStorageService, $http){
         //Assign current state to the global variable
         $rootScope.currentState = $state.current.name;
 
-        if($state.current.name != 'login'){
+        if($state.current.name != 'login'){    
+            // console.log("loginUsername > " + localStorageService.get('loginUsername'));
             if($rootScope.user == null){
                 $state.go('login');
                 localStorageService.remove('userObj');
             }
-            
-            //ยิง api บอก server เกี่ยวกับคนที่ active
-            var request = $http({
-                method: "POST",
-                url: "php/postActive.php",
-                data: { 'PersonalID': $rootScope.user.PersonalID}
-            })
-            request.success(function (res) {
-                console.log(res);
-            });
         }
         document.title = (to.data && to.data.pageTitle) ? to.data.pageTitle : 'Default title';
-
     });
 
 
@@ -78,18 +74,6 @@ function($rootScope, $state, $location, localStorageService, $http){
 
 app.value('myConfig', {
     'Permission':
-        // {
-        //     id: 1,
-        //     title: 'ผู้ดูแลระบบ'
-        // },
-        // {
-        //     id: 2,
-        //     title: 'ผู้บังคับบัญชา'
-        // },
-        // {
-        //     id: 3,
-        //     title: 'นายทหาร'
-        // },
         { 
         '0':'Administrator',
         '1':'ผู้ดูแลระบบ',

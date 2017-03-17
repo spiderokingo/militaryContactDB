@@ -8,7 +8,7 @@ app.controller('reportCtrl', function($scope, $http, $rootScope, toaster, myConf
 
     $scope.reporter = $rootScope.user.FirstName + " " + $rootScope.user.LastName;
     $scope.Company = $rootScope.user.Company;
-    $scope.PrivateTotal = 250;
+    $scope.PrivateTotal = 0;
     $scope.PrivateTotalLeft = $scope.PrivateTotal;
     $scope.AbsentTotal = 0;
 
@@ -35,9 +35,9 @@ app.controller('reportCtrl', function($scope, $http, $rootScope, toaster, myConf
 
   $scope.dateSetup = function(){
     var dateObj = new Date();
-    var month = dateObj.getMonth() + 1; //months from 1-12
-    var day = dateObj.getDate();
-    var year = dateObj.getFullYear()+543; //convert to พ.ศ.
+    var month = dateObj.getUTCMonth() + 1; //months from 1-12
+    var day = dateObj.getUTCDate();
+    var year = dateObj.getUTCFullYear()+543; //convert to พ.ศ.
     
     $scope.currentDate = day + " " + myConfig.ThaiMonth[month] + " " + year;
   }
@@ -47,7 +47,6 @@ app.controller('reportCtrl', function($scope, $http, $rootScope, toaster, myConf
     angular.forEach($scope.reportList, function(val){
       if(val.Value != null) {
         $scope.AbsentTotal += parseInt(val.Value, 10);
-
       }
     });
     $scope.PrivateTotalLeft = $scope.obj.PrivateTotal - $scope.AbsentTotal;

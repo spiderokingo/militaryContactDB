@@ -42,13 +42,15 @@ if($_POST["Mode"] == "VIEW"){
 				{"id":"J","Title":"อื่นๆ","Value":"0"}
 				]';
 			$outp .= '}';
-		$Status = "false";
+		$Status = "NewRecord";
 	}else if($Num_Rows==1){
 		$rs = $result->fetch_array(MYSQLI_ASSOC);
 
 			$DistributionList='{"id":"A","Title":"ราชการ ร้อย.คทร.","Value":"'.$rs["A"].'"},{"id":"B","Title":"ราชการ ร้อย.รส.","Value":"'.$rs["B"].'"},{"id":"C","Title":"รวป.ค่าย","Value":"'.$rs["C"].'"},{"id":"D","Title":"ชรก","Value":"'.$rs["D"].'"},{"id":"E","Title":"นักกีฬา","Value":"'.$rs["E"].'"},{"id":"F","Title":"บริการ","Value":"'.$rs["F"].'"},{"id":"G","Title":"ลา","Value":"'.$rs["G"].'"},{"id":"H","Title":"ขาด","Value":"'.$rs["H"].'"},{"id":"I","Title":"โทษ","Value":"'.$rs["I"].'"},{"id":"J","Title":"อื่นๆ","Value":"'.$rs["J"].'"}';
 
 			$outp = '{"ID":"'.$rs["ID"].'"';
+			$outp .= ',"COTotal":"'.$rs["COTotal"].'"';
+			$outp .= ',"NCOTotal":"'.$rs["NCOTotal"].'"';
 			$outp .= ',"PrivateTotal":"'.$rs["PrivateTotal"].'"';
 			$outp .= ',"DistributionList":['.$DistributionList.']';
 			$outp .= ',"UserReport":"'.$rs["UserReport"].'"';
@@ -66,8 +68,9 @@ $outp ='{"Status":"'.$Status.'","PersonalReport":'.$outp.'}';
 if($_POST["Mode"] == "UPDATE"){
 
 	$sql = "UPDATE personal_report SET ";
-	$sql .= "PrivateTotal='".$_POST["PrivateTotal"]."'";
-	$sql .= ", DistributionList=''";
+	$sql .= "COTotal='".$_POST["COTotal"]."'";
+	$sql .= ", NCOTotal='".$_POST["NCOTotal"]."'";
+	$sql .= ", PrivateTotal='".$_POST["PrivateTotal"]."'";
 	$sql .= ", A='".$_POST["DistributionList"][0]["Value"]."'";
 	$sql .= ", B='".$_POST["DistributionList"][1]["Value"]."'";
 	$sql .= ", C='".$_POST["DistributionList"][2]["Value"]."'";

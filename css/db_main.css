@@ -1,3 +1,8 @@
+
+
+
+
+
 /* CSS Document */
 
 body {font-family: "tahoma", sans-serif;}
@@ -399,4 +404,8 @@ span.menu img{
 
 .hand{
   cursor: pointer;
+}
+
+.EndFloat {
+  clear: both;
 }

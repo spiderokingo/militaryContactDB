@@ -1,0 +1,134 @@
+@media only screen and (max-width: 765px) {
+
+}
+.troopManagementCtrl .Header {
+    width: 100%;
+    padding: 20px 0px 20px 0px;
+    text-align: center;
+    font-size: 25px;
+}
+.troopManagementCtrl .buttonInsert {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    margin: 5px;
+    padding: 5px 10px 5px 10px;
+    border: 1px solid #AAA;
+    border-radius: 5px;
+    background-color: #EEE;
+    font-weight: bold;
+    text-align: center;
+    float: left;
+    cursor: pointer;
+}
+.troopManagementCtrl .buttonInsert:hover {
+    background-color: #CCC;
+}
+
+/* ----- Mission List ------------------------------------------- */
+.troopManagementCtrl .troop-header {
+    position: relative;
+    width: 100%;
+}
+.troopManagementCtrl .troop-header .Mission {
+    position: relative;
+    margin: 5px 0px 0px 0px;
+    padding: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    float: left;
+}
+.troopManagementCtrl .troop-header .MissionName {
+    width: 20%;
+}
+.troopManagementCtrl .troop-header .MissionTime {
+    width: 15%;
+}
+.troopManagementCtrl .troop-header .MissionPersonal {
+    width: 15%;
+}
+.troopManagementCtrl .troop-header .MissionEquipment {
+    width: 20%;
+}
+.troopManagementCtrl .troop-header .MissionLocation {
+    width: 25%;
+}
+.troopManagementCtrl .troop-list .MissionButton {
+    width: 5%;
+}
+.troopManagementCtrl .troop-list {
+    position: relative;
+    width: 100%;
+    margin: 5px;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    background-color: #FAFAFA;
+}
+.troopManagementCtrl .troop-list .Mission {
+    position: relative;
+    margin: 5px 0px 5px 0px;
+    padding: 5px;
+    font-size: 18px;
+    float: left;
+}
+.troopManagementCtrl .troop-list .MissionName {
+    width: 20%;
+    text-align: left;
+    cursor: pointer;
+    border-right: 1px solid #DDD;
+    padding-left: 15px;
+}
+.troopManagementCtrl .troop-list .MissionTime {
+    width: 20%;
+    text-align: center;
+    cursor: pointer;
+    border-right: 1px solid #DDD;
+}
+.troopManagementCtrl .troop-list .MissionPersonal {
+    width: 10%;
+    text-align: center;
+    cursor: pointer;
+    border-right: 1px solid #DDD;
+}
+.troopManagementCtrl .troop-list .MissionEquipment {
+    width: 20%;
+    text-align: center;
+    border-right: 1px solid #DDD;
+}
+.troopManagementCtrl .troop-list .MissionLocation {
+    width: 25%;
+    text-align: center;
+    border-right: 1px solid #DDD;
+}
+.troopManagementCtrl .troop-list .MissionButton {
+    width: 5%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.troopManagementCtrl input {
+    width: 100%;
+}
+.troopManagementCtrl .MissionTime input {
+    width: 45%;
+}
+
+/* ----- Mission Personal List ------------------------------------------- */
+.troopManagementCtrl .MissionPersonalList th {
+    text-align: center;
+}
+.troopManagementCtrl .MissionPersonalList .MisPerNo {
+    width: 75px;
+}
+.troopManagementCtrl .MissionPersonalList .MisPerPosition {
+    width: 150px;
+}
+.troopManagementCtrl .MissionPersonalList .MisPerName {
+    width: 250px;
+}
+.troopManagementCtrl .MissionPersonalList .MisPerCompany {
+    width: 150px;
+}
+.troopManagementCtrl .MissionPersonalList .MisPerDetails {
+}

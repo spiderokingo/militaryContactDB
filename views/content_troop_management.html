@@ -1,0 +1,56 @@
+<div ng-controller="troopManagementCtrl" class="troopManagementCtrl">
+    <div class="Header">{{troopHeader}}</div>
+    <div ng-if="!troopList" class="MissionMenu">
+        <div class="buttonInsert" ng-click="init()">ย้อนกลับ</div>        
+        <div class="buttonInsert" ng-click="init()">แก้ไข</div>        
+    </div>
+    <div ng-if="troopList">
+        <div class="troop-header">
+            <div class="Mission MissionName">ภารกิจ</div>
+            <div class="Mission MissionTime">ห้วงเวลา</div>
+            <div class="Mission MissionPersonal">กำลังพล</div>
+            <div class="Mission MissionEquipment">ยุทโธปกรณ์</div>
+            <div class="Mission MissionLocation">พื้นที่ปฏิบัติการ</div>
+            <div class="Mission MissionButton"></div>
+            <div class="EndFloat"></div>
+        </div>
+        <div class="troop-list" ng-repeat="mis in troopList">
+            <div class="Mission MissionName">{{mis.MissionName}}</div>
+            <div class="Mission MissionTime">{{mis.MissionTime}}</div>
+            <div class="Mission MissionPersonal" ng-click="missionPersonal(mis.MissionID);">{{mis.MissionPersonal}}</div>
+            <div class="Mission MissionEquipment">{{mis.MissionEquipment}}</div>
+            <div class="Mission MissionLocation">{{mis.MissionLocation}}</div>
+            <div class="Mission MissionButton">แก้ไข</div>
+            <div class="EndFloat"></div>
+        </div>
+        <div class="troop-list" ng-show="FormNew">
+            <div class="Mission MissionName"><input type="text" ng-model="txt.MissionName" /></div>
+            <div class="Mission MissionTime"><input type="text" ng-model="txt.MissionTimeSt" />-<input type="text" ng-model="txt.MissionTimeSp" /></div>
+            <div class="Mission MissionPersonal"><input type="text" ng-model="txt.MissionPersonal" /></div>
+            <div class="Mission MissionEquipment"><input type="text" ng-model="txt.MissionEquipment" /></div>
+            <div class="Mission MissionLocation"><input type="text" ng-model="txt.MissionLocation" /></div>
+            <div class="Mission MissionButton" ng-click="missionInsert(txt);">บันทึก</div>
+            <div class="EndFloat">{{txtMissionName}}</div>
+        </div>
+        <div class="buttonInsert" ng-show="!FormNew" ng-click="mission_detail_modal();">เพิ่มภารกิจ</div>
+    </div>
+    <div class="MissionPersonalList" ng-if="MissionPersonalList">
+        <table class="table table-striped">
+            <tr>
+                <th class="MisPerNo">ลำดับ</th>
+                <th class="MisPerPosition">ตำแหน่ง</th>
+                <th class="MisPerName">ยศ,ชื่อ-สกุล</th>
+                <th class="MisPerCompany">กองร้อย</th>
+                <th class="MisPerDetails">รายละเอียด</th>
+            </tr>
+            <tr ng-repeat="per in MissionPersonalList">
+                <td class="MisPerNo">{{per.ID}}</td>
+                <td class="MisPerPosition">{{per.Position}}</td>
+                <td class="MisPerName">{{per.Name}}</td>
+                <td class="MisPerCompany">{{per.Company}}</td>
+                <td class="MisPerDetails">{{per.Details}}</td>
+            </tr>
+        </table>
+        </div>
+    </div>
+</div>

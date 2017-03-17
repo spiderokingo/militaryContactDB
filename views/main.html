@@ -28,11 +28,14 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav hand" ng-repeat="tab in database_tabs">
-        <li class="dropdown" ng-click="mb_menu_clicked($index);" ng-if="MenuShowHide(tab.id)">
-          <a ng-if="!tab.subList" ng-class="{active: $index==database_tabs[tabactive].id}" data-toggle="collapse" data-target=".navbar-collapse.in">{{tab.title}}</a>
-          <a ng-if="tab.subList" ng-class="{active: $index==database_tabs[tabactive].id}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{tab.title}}<span class="caret"></span></a>
-          <ul ng-if="tab.subList" class="dropdown-menu">
-            <li ng-repeat="subTab in tab.subList"><a ng-click="sub_menu_clicked($parent.$index, $index)" data-toggle="collapse" data-target=".navbar-collapse.in">{{subTab.title}}</a></li>
+        <li ng-click="mb_menu_clicked($index);" ng-if="!tab.subList && MenuShowHide(tab.id)" class="dropdown" >
+          <a ng-class="{active: $index==database_tabs[tabactive].id}" data-toggle="collapse" data-target=".navbar-collapse.in">{{tab.title}}</a>
+        </li>
+        <li class="dropdown" ng-click="mb_menu_clicked($index);" ng-if="tab.subList && MenuShowHide(tab.id)">
+          <a  ng-class="{active: $index==database_tabs[tabactive].id}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{tab.title}}<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li ng-repeat="subTab in tab.subList" ng-show="subMenuShowHide(tab.id, $index)">
+              <a ng-click="sub_menu_clicked($parent.$index, $index)" data-toggle="collapse" data-target=".navbar-collapse.in">{{subTab.title}}</a></li>
           </ul>
         </li>
       </ul>

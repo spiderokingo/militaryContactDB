@@ -1,5 +1,20 @@
 
-.title-menu-header{
+.title-menu-header {
     font-size: 18px;
     font-weight: bold;
-} 
+}
+.tbSetting .ID {
+    width: 100px;
+    text-align: center;
+}
+.tbSetting .Name {
+    width: 200px;
+    text-align: left;
+}
+.tbSetting .Details {
+    width: 250px;
+    text-align: left;
+}
+.tbSetting .Menu {
+    text-align: left;
+}

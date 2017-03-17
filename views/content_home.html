@@ -7,7 +7,7 @@
       ประจำวันที่ {{currentDate}}
     </div>
     <table class="table table-striped">
-      <thead class="thead-default wd-m font-11-m">
+      <thead class="thead-default wd-m font-12-m">
         <tr>
           <th></th>
           <th>ร้อย สสก.</th>
@@ -20,9 +20,9 @@
       </thead>
       <tbody>
         <tr ng-repeat="amount in companyNumberList">
-          <th class="font-11-m txt-cen" scope="row" ng-click="detailsOnClicked($index)">
+          <th class="font-12-m txt-cen" scope="row" ng-click="detailsOnClicked($index)">
             
-            <span class="wd-18-inline">{{amount.TitleName}} </span>
+            <span class="wd-30-inline">{{amount.TitleName}} </span>
             <span class="glyphicon glyphicon-search" aria-hidden="true" ng-show="$index == 2"></span>
           </th>
           <td>{{amount.CompanyAssist}}</td>
@@ -45,7 +45,7 @@
     <div class="table-subheader">
       วันที่ {{currentDate}}
     </div>
-    <table class="table table-striped person-table">
+    <table class="table table-striped">
       <thead class="thead-default font-11-m">
         <tr>
           <th></th>
@@ -54,27 +54,22 @@
           <th>ร้อย 1</th>
           <th>ร้อย 2</th>
           <th>ร้อย 3</th>
-          <th>รวม</th>
         </tr>
       </thead>
       <tbody>
-        <tr id="contributionTable" ng-repeat="amount in StatusList" 
-        ng-class="{'black-txt': amount.ContributeTitle == 'คงเหลือ' || amount.ContributeTitle == 'ยอดเดิม' || 
-        amount.ContributeTitle == 'รวมจำหน่าย'}">
+        <tr ng-repeat="amount in StatusList" ng-class="{'black-txt': amount.ContributeTitle == 'คงเหลือ'||
+         amount.ContributeTitle == 'ยอดเดิม' || amount.ContributeTitle == 'ยอดจำหน่าย'}">
           <th class="row-header" scope="row">{{amount.ContributeTitle}}</th>
           <td>{{amount.CompanyAssist}}</td>
           <td>{{amount.CompanySupport}}</td>
           <td>{{amount.Company1}}</td>
           <td>{{amount.Company2}}</td>
           <td>{{amount.Company3}}</td>
-          <td>{{amount.DistributionItemTotal}}</td>
         </tr>
       </tbody>
-      </table>
-      </div>
+    </table>
   </div>
-
-  
+  </div>
 
   <div ng-show="isAdmin && !isDetails">
     <div class="table_holder">
@@ -87,19 +82,17 @@
     <table class="table table-striped userActiveTable">
       <thead class="thead-default font-11-m">
         <tr>
-          <th class="col-md-1 pd-0-lr"></th>
-          <th class="col-md-6 pd-0-lr">ชื่อ</th>
-          <th class="col-md-1">เวลา</th>
-          <th class="col-md-3">วันที่</th>
-          <th class="pd-0-lr">จำนวน</th>
+          <th class="col-md-4 pd-0-lr">ชื่อ</th>
+          <th class="col-md-2">กองร้อย</th>
+          <th class="col-md-4">วันเวลา</th>
+          <th class="col-md-1 pd-0-lr">จำนวน</th>
         </tr>
       </thead>
       <tbody >
-        <tr ng-repeat="activeUser in res.lastActiveUser">
-          <th scope="row"><span>{{$index}}</span></th>
-          <td class="txt-align-lt">{{activeUser.name}}</td>
-          <td>{{activeUser.time}}</td>
-          <td>{{activeUser.date}}</td>
+        <tr ng-repeat="activeUser in res.LastActive">
+          <td class="txt-align-lt">{{activeUser.PersonalName}}</td>
+          <td>{{activeUser.Company}}</td>
+          <td>{{activeUser.DateTime}}</td>
           <td>{{activeUser.ActiveCounter}}</td>
         </tr>
       </tbody>

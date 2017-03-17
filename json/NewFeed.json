@@ -1,0 +1,42 @@
+{
+  "CompanyList": [
+    {
+      "name": "ร้อย.สสก.",
+      "CO": {},
+      "NCO": {},
+      "Private": {
+        "GrandTotal": 82,
+        "DateTime": "2017-02-24 08:53:27",
+        "ContributionList": [
+          {
+            "Title": "ราชการ ร้อย.คทร.",
+            "Value": 7
+          },
+          {
+            "Title": "รวป.ค่าย",
+            "Value": 2
+          }
+        ]
+      }
+    },
+    {
+      "name": "ร้อย.อวบ.ที่ 1",
+      "CO": {},
+      "NCO": {},
+      "Private": {
+        "GrandTotal": 100,
+        "DateTime": "2017-02-24 08:53:27",
+        "ContributionList": [
+          {
+            "Title": "ราชการ ร้อย.คทร.",
+            "Value": 12
+          },
+          {
+            "Title": "รวป.ค่าย",
+            "Value": 9
+          }
+        ]
+      }
+    }
+  ]
+}
